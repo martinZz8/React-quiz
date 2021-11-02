@@ -1,12 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import Root from "./views/root/Root";
 import reportWebVitals from './reportWebVitals';
+
+// router
+import {BrowserRouter as Router} from "react-router-dom";
+
+// redux
+import {Provider} from 'react-redux';
+import {PersistGate} from "redux-persist/integration/react";
+import {store, persistor} from "./redux";
+
+// helmet provider
+import {HelmetProvider} from "react-helmet-async";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <HelmetProvider>
+          <Router>
+            <Root />
+          </Router>
+        </HelmetProvider>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
