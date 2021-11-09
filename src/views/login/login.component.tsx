@@ -5,6 +5,7 @@ import styles from "./login.module.scss";
 
 // templates
 import TemplateView from "../../templates/view/view.template";
+import TemplateLogin from "../../templates/login/login.template";
 
 // components
 import LoginForm from "./login-content/login-form.component";
@@ -17,10 +18,10 @@ interface IViewLogin {
 const ViewLogin:React.FC<IViewLogin> = ({appVersion}) => {
 
   return (
-    <TemplateView appVersion={appVersion} viewTitle="Logowanie">
-      <div className={styles.login}>
+    <TemplateView appVersion={appVersion} viewTitle="Logowanie" hasNoMenu>
+      <TemplateLogin>
         <LoginForm/>
-      </div>
+      </TemplateLogin>
     </TemplateView>
   );
 };

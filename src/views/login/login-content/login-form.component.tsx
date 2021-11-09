@@ -14,6 +14,7 @@ interface ILoginForm {
 const LoginForm:React.FC<ILoginForm> = () => {
   const {loginInputs, handleInputsChange, submitLogin} = useLoginForm();
 
+  // TO DO - do login form
   return (
     <form
       className={styles.loginForm}

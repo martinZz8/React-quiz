@@ -1,7 +1,17 @@
 @import "src/styles/variables";
 
 .app {
+  height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  .appContent {
+    width: 100%;
+    height: 100vh;
+
+    &.appContentWithMenu {
+      height: calc(100vh - 60px);
+    }
+  }
 }

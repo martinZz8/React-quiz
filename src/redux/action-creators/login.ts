@@ -28,9 +28,9 @@ export const loginUser = (email: string, password: string) => {
         accessToken: "abc",
         user: {
           role: "teacher",
-          email: "abc",
-          firstName: "Andrzej",
-          lastName: "Nowak"
+          email: "160746@stud.prz.edu.pl",
+          firstName: "Maciej",
+          lastName: "Harbuz"
         }
       };
 

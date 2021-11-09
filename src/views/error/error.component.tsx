@@ -14,7 +14,7 @@ interface IViewError {
 const ViewError:React.FC<IViewError> = ({appVersion}) => {
 
   return (
-    <TemplateView appVersion={appVersion} viewTitle="Nie ma takiej strony">
+    <TemplateView appVersion={appVersion} viewTitle="Nie ma takiej strony" hasNoMenu>
       <div className={styles.error}>
         Nie ma takiej strony
       </div>

@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 
 // views
 import ViewError from "../../error/error.component";
+import ViewMainMenu from "../../main-menu/main-menu.component";
 
 // interfaces
 interface IAuthenticatedApp {
@@ -15,16 +16,16 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
     <Switch>
       <Route
         exact
-        path="/quizy"
+        path="/menu" //Here should be path="/" and the should not be redirect, that is below
         component={() =>
-          <div>Here</div>
+          <ViewMainMenu appVersion={appVersion} />
         }
       />
       <Route
         exact
         path="/"
         component={() =>
-          <Redirect to="/quizy" />
+          <Redirect to="/menu" />
         }
       />
       <Route

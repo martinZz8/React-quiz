@@ -1,0 +1,11 @@
+@import "../../styles/variables";
+
+.topMenu {
+  width: 100%;
+  height: 60px;
+  padding: 15px 25px 0 25px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
