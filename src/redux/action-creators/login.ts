@@ -6,7 +6,7 @@ import {ActionType} from "../action-types/login";
 import {LoginActions} from "../actions/login";
 import {AdminLogin} from "../data-types/login";
 
-export const loginUser = (email: string, password: string) => {
+export const loginUser = (username: string, password: string) => {
   return async (dispatch: Dispatch<LoginActions>) => {
 
     dispatch({
@@ -15,37 +15,38 @@ export const loginUser = (email: string, password: string) => {
 
     try {
       // TO DO - change the login url
-      // const {data} = await axios.post(`${process.env.REACT_APP_BACKED_URL}/login`, {
-      //   email: email,
-      //   password: password
-      // },{
-      //   headers: {
-      //       'Content-Type': 'application/json'
-      //   }
-      // });
-
-      const data: AdminLogin = { // TO REMOVE - uncomment higher code
-        accessToken: "abc",
-        user: {
-          role: "teacher",
-          email: "160746@stud.prz.edu.pl",
-          firstName: "Maciej",
-          lastName: "Harbuz"
+      const {data} = await axios.post(`${process.env.REACT_APP_BACKED_URL}/api/auth/signin`, {
+          username: username,
+          password: password
+        },{
+        headers: {
+            'Content-Type': 'application/json'
         }
-      };
+      });
 
-      //console.log("data", data);
-      // const loginResults: AdminLogin = {
-      //   accessToken: data.accessToken ? data.accessToken : "",
+      // const data: AdminLogin = { // TO REMOVE - uncomment higher code
+      //   accessToken: "abc",
       //   user: {
-      //     role: data?.user?.role ? data.user.role : "",
-      //     firstName: data?.user?.firstName ? data.user.firstName : "",
-      //     lastName: data?.user?.lastName ? data.user.lastName : "",
-      //     email: data?.user?.email ? data.user.email : ""
+      //     role: "teacher",
+      //     email: "160746@stud.prz.edu.pl",
+      //     firstName: "Maciej",
+      //     lastName: "Harbuz"
       //   }
       // };
 
-      const loginResults: AdminLogin = data; // TO REMOVE - uncomment higher code
+      console.log("data", data);
+      const loginResults: AdminLogin = {
+        accessToken: data.token ? data.token : "",
+        refreshToken: data.refreshToken ? data.refreshToken : "",
+        user: {
+          id: data.id ? data.id : "",
+          username: data.username ? data.username : "",
+          firstName: data.firstname ? data.firstname : "",
+          lastName: data.lastname ? data.lastname : "",
+          email: data.email ? data.email : "",
+          roles: data.roles
+        }
+      };
 
       dispatch({
         type: ActionType.USER_LOGIN_SUCCESS,
@@ -54,8 +55,10 @@ export const loginUser = (email: string, password: string) => {
     } catch (err) {
       dispatch({
         type: ActionType.USER_LOGIN_FAIL,
-        payload: "error during login"
+        payload: "Niepoprawne dane logowania"
       });
+
+      console.log("Error:", err);
     }
   }
 };

@@ -1,6 +1,6 @@
-const isUserAuthenticated = (accessToken: string, userRole: string) => {
+const isUserAuthenticated = (accessToken: string, userRoles: string[]): boolean => {
   if(accessToken !== "") {
-    if(userRole === "admin" || userRole === "teacher" || userRole === "student") {
+    if (userRoles.includes("ROLE_USER") || userRoles.includes("ROLE_TEACHER")) {
       return true;
     }
   }

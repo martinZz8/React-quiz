@@ -1,10 +1,13 @@
 interface Login {
   accessToken: string;
+  refreshToken: string;
   user: {
-    role: string;
+    id: string;
+    username: string;
     firstName: string;
     lastName: string;
     email: string;
+    roles: string[];
   };
 }
 

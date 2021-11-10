@@ -5,12 +5,13 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import isUserAuthenticated from "../../functions/is-user-authenticated";
 
 const useRoot = () => {
-  const {accessToken, user: {role: userRole}} = useTypedSelector(state => state.login.loginData);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(isUserAuthenticated(accessToken, userRole));
+  const {accessToken, user: {roles: userRoles}} = useTypedSelector(state => state.login.loginData);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(isUserAuthenticated(accessToken, userRoles));
 
   useEffect(() => {
-    setIsUserLoggedIn(isUserAuthenticated(accessToken, userRole));
-  },[accessToken, userRole]);
+    console.log("User authentication:", isUserAuthenticated(accessToken, userRoles));
+    setIsUserLoggedIn(isUserAuthenticated(accessToken, userRoles));
+  },[accessToken, userRoles]);
 
   return {isUserLoggedIn};
 };

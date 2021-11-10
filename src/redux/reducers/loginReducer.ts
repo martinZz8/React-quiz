@@ -15,11 +15,14 @@ const initialState: ILoginState = {
   error: null,
   loginData: {
     accessToken: "",
+    refreshToken: "",
     user: {
-      role: "",
+      id: "",
+      username: "",
       firstName: "",
       lastName: "",
-      email: ""
+      email: "",
+      roles: []
     }
   }
 };
@@ -45,11 +48,14 @@ const reducer = (state: ILoginState = initialState, action: LoginActions): ILogi
     case ActionType.USER_LOGOUT:
       state.loginData = {
         accessToken: "",
+        refreshToken: "",
         user: {
-          role: "",
+          id: "",
+          username: "",
           firstName: "",
           lastName: "",
-          email: ""
+          email: "",
+          roles: []
         }
       };
       return { ...state, loginData: {...state.loginData, user: {...state.loginData.user}}};

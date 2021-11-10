@@ -1,7 +1,12 @@
 // interfaces
-import {ILoginInputs} from "./login-form.types";
+import {ILoginInputs, IErrorLoginInputs} from "./login-form.types";
 
 export const initialLoginInputs: ILoginInputs = {
-  email: "",
+  username: "",
   password: ""
+};
+
+export const initialErrorLoginInputs: IErrorLoginInputs = {
+  usernameMessage: "",
+  passwordMessage: ""
 };
