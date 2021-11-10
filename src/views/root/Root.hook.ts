@@ -9,7 +9,6 @@ const useRoot = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(isUserAuthenticated(accessToken, userRoles));
 
   useEffect(() => {
-    console.log("User authentication:", isUserAuthenticated(accessToken, userRoles));
     setIsUserLoggedIn(isUserAuthenticated(accessToken, userRoles));
   },[accessToken, userRoles]);
 

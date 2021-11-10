@@ -1,9 +1,13 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
+// hooks
+import {useTypedSelector} from "../../../hooks/useTypedSelector";
+
 // views
 import ViewError from "../../error/error.component";
-import ViewMainMenu from "../../main-menu/main-menu.component";
+import ViewStudentMainMenu from "../../main-menu/student/student-main-menu.component";
+import ViewTeacherMainMenu from "../../main-menu/teacher/teacher-main-menu.component";
 
 // interfaces
 interface IAuthenticatedApp {
@@ -11,21 +15,20 @@ interface IAuthenticatedApp {
 }
 
 const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
+  const userRoles = useTypedSelector(state => state.login.loginData.user.roles);
 
   return (
     <Switch>
-      <Route
-        exact
-        path="/menu" //Here should be path="/" and the should not be redirect, that is below
-        component={() =>
-          <ViewMainMenu appVersion={appVersion} />
-        }
-      />
+      {/*other routes*/}
       <Route
         exact
         path="/"
-        component={() =>
-          <Redirect to="/menu" />
+        component={() => (
+            userRoles.includes("ROLE_USER") ?
+              <ViewStudentMainMenu appVersion={appVersion} />
+            :
+              <ViewTeacherMainMenu appVersion={appVersion} />
+          )
         }
       />
       <Route

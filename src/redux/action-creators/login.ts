@@ -34,7 +34,6 @@ export const loginUser = (username: string, password: string) => {
       //   }
       // };
 
-      console.log("data", data);
       const loginResults: AdminLogin = {
         accessToken: data.token ? data.token : "",
         refreshToken: data.refreshToken ? data.refreshToken : "",
@@ -57,14 +56,14 @@ export const loginUser = (username: string, password: string) => {
         type: ActionType.USER_LOGIN_FAIL,
         payload: "Niepoprawne dane logowania"
       });
-
-      console.log("Error:", err);
     }
   }
 };
 
 export const logoutUser = () => {
   return async (dispatch: Dispatch<LoginActions>) => {
+    // TO DO - logout user in db
+
     dispatch({
       type: ActionType.USER_LOGOUT
     });

@@ -84,7 +84,16 @@ const LoginForm:React.FC<ILoginForm> = () => {
             />
           </div>
         </div>
-        {/*Errors displaying*/}
+        <div className={styles.loginErrorWrap}>
+          {
+            errorLogin ?
+              <div className={styles.errorBox}>
+                <p>{errorLogin}</p>
+              </div>
+            :
+              null
+          }
+        </div>
         <div className={styles.additionalInfo}>
           <p>
             Nie masz jeszcze konta?
@@ -93,6 +102,14 @@ const LoginForm:React.FC<ILoginForm> = () => {
             </Link>
           </p>
         </div>
+        {
+          loadingLogin ?
+            <div className={styles.loaderBox}>
+              <div className="loader"/>
+            </div>
+          :
+            null
+        }
       </div>
     </form>
   );

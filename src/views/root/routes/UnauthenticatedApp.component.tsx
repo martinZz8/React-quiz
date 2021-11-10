@@ -15,6 +15,13 @@ const UnauthenticatedApp: React.FC<IUnauthenticatedApp> = ({appVersion}) => {
     <Switch>
       <Route
         exact
+        path="/register"
+        component={() =>
+          <></>//TO DO
+        }
+      />
+      <Route
+        exact
         path="/"
         component={() =>
           <ViewLogin appVersion={appVersion} />
