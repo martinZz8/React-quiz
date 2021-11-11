@@ -1,14 +1,14 @@
 import React from "react";
 
 // styles
-import styles from "./login.module.scss";
+import styles from "./login-content.module.scss";
 
 // templates
 import TemplateView from "../../templates/view/view.template";
 import TemplateLogin from "../../templates/login/login.template";
 
 // components
-import LoginForm from "./login-content/login-form.component";
+import LoginForm from "./login-form/login-form.component";
 
 // interfaces
 interface IViewLogin {

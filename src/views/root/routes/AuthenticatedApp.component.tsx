@@ -26,7 +26,7 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
         component={() => (
             userRoles.includes("ROLE_USER") ?
               <ViewStudentMainMenu appVersion={appVersion} />
-            :
+            ://ROLE_TEACHER
               <ViewTeacherMainMenu appVersion={appVersion} />
           )
         }

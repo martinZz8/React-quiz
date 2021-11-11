@@ -2,11 +2,11 @@
 import {ILoginInputs, IErrorLoginInputs} from "./login-form.types";
 
 export const initialLoginInputs: ILoginInputs = {
-  username: "",
+  userName: "",
   password: ""
 };
 
 export const initialErrorLoginInputs: IErrorLoginInputs = {
-  usernameMessage: "",
+  userNameMessage: "",
   passwordMessage: ""
 };

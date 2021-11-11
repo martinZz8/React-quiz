@@ -6,7 +6,7 @@ import {ActionType} from "../action-types/login";
 import {LoginActions} from "../actions/login";
 import {AdminLogin} from "../data-types/login";
 
-export const loginUser = (username: string, password: string) => {
+export const loginUser = (userName: string, password: string) => {
   return async (dispatch: Dispatch<LoginActions>) => {
 
     dispatch({
@@ -14,16 +14,6 @@ export const loginUser = (username: string, password: string) => {
     });
 
     try {
-      // TO DO - change the login url
-      const {data} = await axios.post(`${process.env.REACT_APP_BACKED_URL}/api/auth/signin`, {
-          username: username,
-          password: password
-        },{
-        headers: {
-            'Content-Type': 'application/json'
-        }
-      });
-
       // const data: AdminLogin = { // TO REMOVE - uncomment higher code
       //   accessToken: "abc",
       //   user: {
@@ -33,6 +23,15 @@ export const loginUser = (username: string, password: string) => {
       //     lastName: "Harbuz"
       //   }
       // };
+
+      const {data} = await axios.post(`${process.env.REACT_APP_BACKED_URL}/api/auth/signin`, {
+          username: userName,
+          password: password
+        },{
+        headers: {
+            'Content-Type': 'application/json'
+        }
+      });
 
       const loginResults: AdminLogin = {
         accessToken: data.token ? data.token : "",
@@ -60,9 +59,16 @@ export const loginUser = (username: string, password: string) => {
   }
 };
 
-export const logoutUser = () => {
+export const logoutUser = (userId: string, accessToken: string) => {
   return async (dispatch: Dispatch<LoginActions>) => {
-    // TO DO - logout user in db
+    await axios.post(`${process.env.REACT_APP_BACKED_URL}/api/auth/logout`, {
+      userId: userId,
+      token: accessToken
+    },{
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
     dispatch({
       type: ActionType.USER_LOGOUT

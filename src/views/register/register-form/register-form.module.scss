@@ -1,0 +1,104 @@
+@import "src/styles/variables";
+
+.registerForm {
+  width: 440px;
+  height: 750px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: $colorWhite;
+  padding: 20px 33px;
+  margin: 10px 10px;
+
+  p.headerText {
+    width: 100%;
+    height: auto;
+    color: $colorBlack;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
+    margin-bottom: 6px;
+  }
+
+  .inputForm {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .input {
+      width: 100%;
+      margin-bottom: 3px;
+    }
+
+    p.selectorLabel {
+      width: 100%;
+      height: auto;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 15px;
+      color: $colorBlack;
+      margin-bottom: 3px;
+    }
+
+    .roleSelector {
+      width: 100%;
+      height: 33px;
+      margin-bottom: 20px;
+    }
+
+    .submitButtonForm {
+      width: 100%;
+      height: 33px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 5px;
+
+      .buttonWrap {
+        width: 193px;
+        height: 100%;
+      }
+    }
+
+    .registerErrorWrap {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .privatePolicy {
+      width: 100%;
+      height: auto;
+      padding: 0 40px;
+
+      p {
+        font-weight: 600;
+        font-size: 13px;
+        color: $colorSolidDarkGray;
+        text-align: center;
+
+        a {
+          color: $colorSemiDarkPurple;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 850px) {
+  .registerForm {
+
+  }
+}

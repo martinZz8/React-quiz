@@ -1,0 +1,73 @@
+@import "src/styles/variables";
+
+@mixin selectorItem {
+  width: 50%;
+  height: 100%;
+}
+
+@mixin singleSelect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &.noPointer {
+    cursor: default;
+  }
+
+  p {
+    z-index: 3;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+
+    &.textNotSelected {
+      color: $colorSolidDarkGray
+    }
+
+    &.textSelected {
+      color: $colorWhite;
+    }
+  }
+}
+
+.roleSelector {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid $colorGray;
+  border-radius: 10px;
+  position: relative;
+
+  .student {
+    @include selectorItem();
+    @include singleSelect();
+  }
+
+  .teacher {
+    @include selectorItem();
+    @include singleSelect();
+  }
+
+  .selector {
+    @include selectorItem();
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $colorLightPurple;
+    border-radius: 10px;
+    transition: transform 0.3s ease-out;
+
+    &.selectedStudent {
+      transform: translateX(0px);
+    }
+
+    &.selectedTeacher {
+      transform: translateX(100%);
+    }
+  }
+}

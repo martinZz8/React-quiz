@@ -21,12 +21,12 @@ const useLoginForm = () => {
     setLoginErrorMessage("");
   },[]);
 
-  // Live validating - username
+  // Live validating - userName
   useEffect(() => {
     if (isLiveValidation) {
-      validateUsername();
+      validateUserName();
     }
-  },[loginInputs.username]);
+  },[loginInputs.userName]);
 
   // Live validating - password
   useEffect(() => {
@@ -35,38 +35,32 @@ const useLoginForm = () => {
     }
   },[loginInputs.password]);
 
-  const validateUsername = (): boolean => {
-    if (loginInputs.username.length === 0) {
-      setErrorLoginInputs(prev => ({
-        ...prev,
-        usernameMessage: "Nazwa użytkownika nie może być pusta"
-      }));
-      return false;
+  const validateUserName = (): boolean => {
+    let message = "";
+    if (loginInputs.userName.length === 0) {
+      message = "Nazwa użytkownika nie może być pusta";
     }
-    else {
-      setErrorLoginInputs(prev => ({
-        ...prev,
-        usernameMessage: ""
-      }));
-      return true;
-    }
+
+    setErrorLoginInputs(prev => ({
+      ...prev,
+      userNameMessage: message
+    }));
+
+    return message.length === 0;
   };
 
   const validatePassword = (): boolean => {
+    let message = "";
     if (loginInputs.password.length === 0) {
-      setErrorLoginInputs(prev => ({
-        ...prev,
-        passwordMessage: "Hasło nie może być puste"
-      }));
-      return false;
+      message = "Hasło nie może być puste";
     }
-    else {
-      setErrorLoginInputs(prev => ({
-        ...prev,
-        passwordMessage: ""
-      }));
-      return true;
-    }
+
+    setErrorLoginInputs(prev => ({
+      ...prev,
+      passwordMessage: message
+    }));
+
+    return message.length === 0;
   };
 
   const handleInputsChange = (name: string, value: string) => {
@@ -84,7 +78,7 @@ const useLoginForm = () => {
     let canSubmit = true;
 
     // Validate email
-    if (!validateUsername()) {
+    if (!validateUserName()) {
       canSubmit = false;
     }
 
@@ -95,7 +89,7 @@ const useLoginForm = () => {
 
     // Checking if we can submit the login
     if (canSubmit) {
-      loginUser(loginInputs.username, loginInputs.password);
+      loginUser(loginInputs.userName, loginInputs.password);
     }
   };
 

@@ -9,6 +9,8 @@ import {ReactComponent as SVGLoginImage} from "../../../assets/svg/login_image.s
 
 // components
 import InputField from "../../../components/ui/input-field/input-field.component";
+import MessageBox from "../../../components/message-box/message-box.component";
+import LoadingModal from "../../../modals/loading-modal/loading-modal.component";
 
 // hooks
 import useLoginForm from "./login-form.hook";
@@ -22,7 +24,6 @@ interface ILoginForm {
 const LoginForm:React.FC<ILoginForm> = () => {
   const {loginInputs, errorLoginInputs, handleInputsChange, submitLogin, loadingLogin, errorLogin} = useLoginForm();
 
-  // TO DO - do login form
   return (
     <form
       className={styles.loginForm}
@@ -54,11 +55,11 @@ const LoginForm:React.FC<ILoginForm> = () => {
               type="text"
               label="Nazwa użytkownika"
               placeholder="Nazwa użytkownika"
-              name="username"
-              value={loginInputs.username}
+              name="userName"
+              value={loginInputs.userName}
               handleChange={handleInputsChange}
-              isError={errorLoginInputs.usernameMessage !== ""}
-              errorMessage={errorLoginInputs.usernameMessage}
+              isError={errorLoginInputs.userNameMessage !== ""}
+              errorMessage={errorLoginInputs.userNameMessage}
             />
           </div>
           <div className={styles.input}>
@@ -87,9 +88,10 @@ const LoginForm:React.FC<ILoginForm> = () => {
         <div className={styles.loginErrorWrap}>
           {
             errorLogin ?
-              <div className={styles.errorBox}>
-                <p>{errorLogin}</p>
-              </div>
+              <MessageBox
+                message={errorLogin}
+                isError
+              />
             :
               null
           }
@@ -104,9 +106,7 @@ const LoginForm:React.FC<ILoginForm> = () => {
         </div>
         {
           loadingLogin ?
-            <div className={styles.loaderBox}>
-              <div className="loader"/>
-            </div>
+            <LoadingModal/>
           :
             null
         }
