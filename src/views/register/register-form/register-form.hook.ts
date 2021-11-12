@@ -18,9 +18,9 @@ const useRegisterForm = () => {
   const [isSuccessRegister, setIsSuccessRegister] = useState<boolean>(false);
   const emailRgx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  useEffect(() => {
-    console.log("Inputs change:", registerInputs);
-  },[registerInputs]);
+  // useEffect(() => {
+  //   console.log("Inputs change:", registerInputs);
+  // },[registerInputs]);
 
   useEffect(() => {
     if (isSuccessRegister) {
@@ -200,6 +200,7 @@ const useRegisterForm = () => {
       setIsSuccessRegister(false);
       setIsLoadingRegister(true);
 
+      // Fetching register
       fetch(`${process.env.REACT_APP_BACKED_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
@@ -228,7 +229,6 @@ const useRegisterForm = () => {
       })
       .catch(err => {
         setIsLoadingRegister(false);
-        console.log("Error2:", err);
         setErrorMessageRegister("Wystąpił nieoczekiwany błąd podczas rejestracji");
       });
     }

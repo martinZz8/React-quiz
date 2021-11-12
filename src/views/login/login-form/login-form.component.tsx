@@ -99,7 +99,7 @@ const LoginForm:React.FC<ILoginForm> = () => {
         <div className={styles.additionalInfo}>
           <p>
             Nie masz jeszcze konta?
-            <Link to="/register">
+            <Link to="/rejestracja">
               Zarejestruj się!
             </Link>
           </p>

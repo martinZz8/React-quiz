@@ -58,5 +58,9 @@
       color: $colorDarkGray;
       background-color: $colorSolidDarkGray;
     }
+
+    &.noBorderRadius {
+      border-radius: 0;
+    }
   }
 }

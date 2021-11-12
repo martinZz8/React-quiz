@@ -120,26 +120,25 @@ const RegisterForm: React.FC = () => {
             />
           </div>
         </div>
+        {/*Display the error from backend API*/}
+        <div className={styles.registerErrorWrap}>
         {
           isSuccessRegister ?
-            <div className={styles.registerErrorWrap}>
-              <MessageBox
-                message="Pomyślnie zarejestrowano konto"
-                link={<Link to="/">Zaloguj się</Link>}
-                wide
-              />
-            </div>
+            <MessageBox
+              message="Pomyślnie zarejestrowano konto"
+              link={<Link to="/">Zaloguj się</Link>}
+              wide
+            />
           : errorMessageRegister !== "" ?
-            <div className={styles.registerErrorWrap}>
-              <MessageBox
-                message={errorMessageRegister}
-                wide
-                isError
-              />
-            </div>
+            <MessageBox
+              message={errorMessageRegister}
+              wide
+              isError
+            />
           :
             null
         }
+        </div>
         <div className={styles.privatePolicy}>
           <p>
             Rejestrujc się w serwisie akceptujesz <Link to="#">Regulamin</Link>

@@ -1,26 +1,25 @@
 import React, {ChangeEvent} from "react";
 
 // styles
-import styles from "./input-field.module.scss";
+import styles from "./text-area.module.scss";
 
 // interfaces
-interface IInputField {
-  type: "text" | "password" | "email" | "number";
+interface ITextArea {
   name: string;
   value: string;
   label?: string;
   placeholder: string;
   isError?: boolean;
   errorMessage?: string;
-  handleChange: (name: string, value: string) => void;
+  handleChange: (name: string, value: string) => void
 }
 
-const InputField: React.FC<IInputField> = ({
-    type, name, value, label, placeholder, isError, errorMessage, handleChange
+const TextArea: React.FC<ITextArea> = ({
+    name, value, label, placeholder, isError, errorMessage, handleChange
   }) => {
 
   return (
-    <div className={styles.inputField}>
+    <div className={styles.textAreaWrap}>
       {
         label ?
           <div className={styles.label}>
@@ -29,13 +28,12 @@ const InputField: React.FC<IInputField> = ({
         :
           null
       }
-      <input
-        className={`${styles.input} ${isError ? styles.errorInput : ""}`}
-        type={type}
+      <textarea
+        className={`${styles.textArea} ${isError ? styles.errorTextArea : ""}`}
         name={name}
         value={value}
         placeholder={placeholder}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e.target.name, e.target.value)}
+        onChange={(e:ChangeEvent<HTMLTextAreaElement>) => handleChange(e.target.name, e.target.value)}
       />
       <div className={styles.errorMessage}>
         {
@@ -49,4 +47,4 @@ const InputField: React.FC<IInputField> = ({
   );
 };
 
-export default InputField;
+export default TextArea;

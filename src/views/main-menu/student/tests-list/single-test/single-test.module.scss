@@ -1,0 +1,57 @@
+@import "src/styles/variables";
+
+.singleTest {
+  width: 187px;
+  height: 229px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $colorDarkWhite;
+  border: 4px solid $colorLightPurple;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+
+  .oneData {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 5px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    p {
+      color: $colorBlack;
+      font-weight: 400;
+      font-style: normal;
+      text-align: center;
+
+      &.title {
+        font-size: 10px;
+      }
+
+      &.content {
+        font-size: 15px;
+      }
+    }
+  }
+
+  .actionButton {
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    border-color: $colorDarkPurple;
+
+    button {
+      background-color: $colorDarkPurple !important;
+    }
+  }
+}

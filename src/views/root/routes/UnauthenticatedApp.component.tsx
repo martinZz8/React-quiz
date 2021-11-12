@@ -16,7 +16,7 @@ const UnauthenticatedApp: React.FC<IUnauthenticatedApp> = ({appVersion}) => {
     <Switch>
       <Route
         exact
-        path="/register"
+        path="/rejestracja"
         component={() =>
           <ViewRegister appVersion={appVersion} />
         }

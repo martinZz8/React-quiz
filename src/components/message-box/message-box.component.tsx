@@ -16,7 +16,7 @@ const MessageBox: React.FC<IMessageBox> = ({message, link, wide, isError}) => {
 
   return (
     <div className={`${styles.messageBox} ${wide ? styles.wide : ""} ${isError ? styles.colorRed : styles.colorGreen}`}>
-      <p>{message} {link ? link : ""}</p>
+      <p>{message}{link ? link : ""}</p>
     </div>
   )
 };
