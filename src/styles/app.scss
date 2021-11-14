@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
 @import "src/styles/variables";
 
-//Global settings
+// -- Global settings --
 html {
   font-family: 'Nunito', sans-serif;
 }
@@ -24,7 +24,8 @@ p {
   margin: 0;
 }
 
-// Classes
+// -- Classes --
+// noSelect
 .noSelect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -34,6 +35,7 @@ p {
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
+// loader
 .loader {
   border: 11px solid #f3f3f3; /* Light grey */
   border-top: 11px solid $colorDarkPurple; /* Purple */
@@ -46,4 +48,26 @@ p {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+// custom scrollbar
+.customScrollBar {
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color: $colorLighterPurple $colorLightGray;
+
+  // Chromium
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $colorLightGray;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $colorLighterPurple;
+    border-radius: 100px;
+  }
 }

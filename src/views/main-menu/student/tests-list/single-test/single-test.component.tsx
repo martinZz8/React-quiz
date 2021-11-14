@@ -4,9 +4,11 @@ import {withRouter, RouteComponentProps} from "react-router";
 // styles
 import styles from "./single-test.module.scss";
 
+// components
+import Button from "../../../../../components/ui/button/button.component";
+
 // interfaces
 import {ITestsToShow} from "../student-tests-list.types";
-import Button from "../../../../../components/ui/button/button.component";
 
 interface ISingleTest extends RouteComponentProps {
   testToShow: ITestsToShow;

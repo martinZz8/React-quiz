@@ -64,7 +64,7 @@ const useStudentTestsList = () => {
         },
         {
           id: "7",
-          name: "test6",
+          name: "test7",
           author: "Maciej Harbuz",
           startDate: "07.13.2021 13:00",
           endDate: "07.13.2021 15:00",

@@ -1,5 +1,4 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, {ReactElement} from "react";
 
 // styles
 import styles from "./message-box.module.scss";
@@ -7,7 +6,7 @@ import styles from "./message-box.module.scss";
 // interfaces
 interface IMessageBox {
   message: string;
-  link?: any;
+  link?: ReactElement;
   wide?: boolean;
   isError?: boolean;
 }

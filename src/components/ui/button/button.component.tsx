@@ -43,7 +43,7 @@ const Button: React.FC<IButton> = ({
           ${noBorderRadius ? styles.noBorderRadius : ""}
         `}
         type={type}
-        onClick={() => handleClick && !disabled && handleClick()}
+        onClick={() => handleClick && handleClick()}
         disabled={disabled}
       >
         {title}

@@ -53,6 +53,10 @@
       background-color: $colorLightRed;
       border-color: $colorRed;
     }
+
+    &.disabled {
+      cursor: not-allowed;
+    }
   }
 
   .errorMessage {

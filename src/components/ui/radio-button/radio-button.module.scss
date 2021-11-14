@@ -8,6 +8,10 @@
   align-items: center;
   cursor: pointer;
 
+  &.disabledRadioButton {
+    cursor: not-allowed;
+  }
+
   .input {
     margin: 0;
     appearance: none;
@@ -37,6 +41,15 @@
         transform: scale(1);
       }
     }
+
+    &.disabled {
+      cursor: not-allowed;
+      border-color: $colorSolidDarkGray;
+
+      &::before {
+        box-shadow: inset 1em 1em $colorSolidDarkGray;
+      }
+    }
   }
 
   p {
@@ -53,6 +66,10 @@
   &:hover {
     .input {
       border-color: $colorDarkPurple;
+
+      &.disabled {
+        border-color: $colorSolidDarkGray;
+      }
     }
   }
 }

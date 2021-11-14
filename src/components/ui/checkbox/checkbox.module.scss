@@ -7,6 +7,10 @@
   padding-left: 37px;
   cursor: pointer;
 
+  &.disabledContainer {
+    cursor: not-allowed;
+  }
+
   color: $colorBlack;
   font-weight: 400;
   font-style: normal;
@@ -21,6 +25,10 @@
   cursor: pointer;
   height: 0;
   width: 0;
+
+  &.disabledInput {
+    cursor: not-allowed;
+  }
 }
 
 /* Create a custom checkbox */
@@ -32,16 +40,28 @@
   width: 23px;
   background-color: $colorWhite;
   border: 2px solid $colorBlack;
+
+  &.disabledColors {
+    border-color: $colorSolidDarkGray;
+  }
 }
 
 /* On mouse-over, add a dark purple border color */
 .container:hover input ~ .checkmark {
   border-color: $colorDarkPurple;
+
+  &.disabledColors {
+    border-color: $colorSolidDarkGray;
+  }
 }
 
-/* When the checkbox is checked, add a blue background */
+/* When the checkbox is checked, add a dark purple background */
 .container input:checked ~ .checkmark {
   background-color: $colorDarkPurple;
+
+  &.disabledColors {
+    background-color: $colorSolidDarkGray;
+  }
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */

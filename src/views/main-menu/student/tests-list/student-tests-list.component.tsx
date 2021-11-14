@@ -12,6 +12,9 @@ import {useTypedSelector} from "../../../../hooks/useTypedSelector";
 // hooks
 import useStudentTestsList from "./student-tests-list.hook";
 
+// templates
+import TemplateContentCard from "../../../../templates/content-card/content-card.template";
+
 // components
 import LoadingModal from "../../../../modals/loading-modal/loading-modal.component";
 import SingleTest from "./single-test/single-test.component";
@@ -21,10 +24,9 @@ const StudentTestsList: React.FC = () => {
   const {firstName} = useTypedSelector(state => state.login.loginData.user);
 
   return (
-    <div className={styles.studentTestsList}>
-      <div className={styles.header}>
-        <p>Cześć <b>{firstName}!</b></p>
-      </div>
+    <TemplateContentCard
+      title={<p>Cześć <b>{firstName}!</b></p>}
+    >
       <div className={styles.testsView}>
         <div className={styles.testsMenu}>
           <div
@@ -47,7 +49,7 @@ const StudentTestsList: React.FC = () => {
             </p>
           </div>
         </div>
-        <div className={`${styles.testsList} ${testsToShow.length === 0 ? styles.noTests : ""}`}>
+        <div className={`customScrollBar ${styles.testsList} ${testsToShow.length === 0 ? styles.noTests : ""}`}>
           {
             !areTestsLoading ?
               testsToShow.length > 0 ?
@@ -76,7 +78,7 @@ const StudentTestsList: React.FC = () => {
           }
         </div>
       </div>
-    </div>
+    </TemplateContentCard>
   );
 };
 
