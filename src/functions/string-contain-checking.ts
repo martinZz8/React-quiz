@@ -10,10 +10,10 @@ function checkSignCase(ch: string): number {
     return signCases.NUMERIC;
   }
   else {
-    if (ch == ch.toUpperCase()) {
+    if (ch === ch.toUpperCase()) {
       return signCases.UPPER_CASE;
     }
-    if (ch == ch.toLowerCase()){
+    if (ch === ch.toLowerCase()){
       return signCases.LOWER_CASE;
     }
   }

@@ -1,0 +1,78 @@
+@import "src/styles/variables";
+
+.testContentView {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 19px 25px;
+  position: relative;
+
+  .header {
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+
+    .title {
+      p {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 26px;
+        color: $colorBlack;
+      }
+    }
+
+    .counter {
+      p {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 20px;
+        color: $colorBlack;
+      }
+    }
+  }
+
+  .contentContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &.questions {
+      justify-content: flex-start;
+      align-items: flex-start;
+      overflow-y: scroll;
+
+      .buttonWrap {
+        width: 150px;
+        height: 50px;
+      }
+    }
+
+    &.endOfTest, &.startTest {
+      .message {
+        margin-bottom: 40px;
+
+        p {
+          font-style: normal;
+          font-weight: 600;
+          font-size: 26px;
+          color: $colorBlack;
+          text-align: center;
+        }
+      }
+
+      .buttonWrap {
+        width: 150px;
+        height: 50px;
+      }
+    }
+  }
+}

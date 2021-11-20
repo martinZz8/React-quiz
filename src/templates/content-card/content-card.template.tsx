@@ -5,16 +5,21 @@ import styles from "./content-card.module.scss";
 
 // interfaces
 interface ITemplateContentCard {
-  title: string | ReactElement;
+  title?: string | ReactElement;
 }
 
 const TemplateContentCard: React.FC<ITemplateContentCard> = ({title, children}) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        {title}
-      </div>
+      {
+        title ?
+          <div className={styles.header}>
+            {title}
+          </div>
+        :
+          null
+      }
       <div className={styles.content}>
         {children}
       </div>

@@ -8,6 +8,7 @@ import {useTypedSelector} from "../../../hooks/useTypedSelector";
 import ViewError from "../../error/error.component";
 import ViewStudentMainMenu from "../../main-menu/student/student-main-menu.component";
 import ViewTeacherMainMenu from "../../main-menu/teacher/teacher-main-menu.component";
+import ViewSolveATest from "../../solve-a-test/solve-a-test.component";
 
 // interfaces
 interface IAuthenticatedApp {
@@ -20,6 +21,17 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
   return (
     <Switch>
       {/*other routes*/}
+      <Route
+        exact
+        path="/rozwiaz-test/:id"
+        component={() => (
+          userRoles.includes("ROLE_USER") ?
+            <ViewSolveATest appVersion={appVersion} />
+          ://ROLE_TEACHER
+            <Redirect to="/" />
+        )
+        }
+      />
       <Route
         exact
         path="/"

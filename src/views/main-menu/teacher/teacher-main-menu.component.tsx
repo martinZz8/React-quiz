@@ -5,7 +5,7 @@ import styles from "./teacher-main-menu.module.scss";
 
 // templates
 import TemplateView from "../../../templates/view/view.template";
-import TemplateMainMenu from "../../../templates/main-menu/main-menu.template";
+import TemplateContentCenter from "../../../templates/content-center/content-center.template";
 
 // interfaces
 interface IViewTeacherMainMenu {
@@ -17,11 +17,11 @@ const ViewTeacherMainMenu: React.FC<IViewTeacherMainMenu> = ({appVersion}) => {
   //TO DO - write main menu layout
   return (
     <TemplateView appVersion={appVersion} viewTitle="Menu">
-      <TemplateMainMenu>
+      <TemplateContentCenter>
         <div>
           Here teacher
         </div>
-      </TemplateMainMenu>
+      </TemplateContentCenter>
     </TemplateView>
   );
 };

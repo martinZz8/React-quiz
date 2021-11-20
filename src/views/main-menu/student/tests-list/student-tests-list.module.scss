@@ -67,7 +67,7 @@
 
   .testsList {
     width: 100%;
-    height: calc(100% - 70px);
+    height: 100%; //calc(100% - 70px)
     background-color: transparent;
     overflow-y: scroll;
     padding: 19px;
