@@ -14,16 +14,6 @@ export const loginUser = (userName: string, password: string) => {
     });
 
     try {
-      // const data: AdminLogin = { // TO REMOVE - uncomment higher code
-      //   accessToken: "abc",
-      //   user: {
-      //     role: "teacher",
-      //     email: "160746@stud.prz.edu.pl",
-      //     firstName: "Maciej",
-      //     lastName: "Harbuz"
-      //   }
-      // };
-
       const {data} = await axios.post(`${process.env.REACT_APP_BACKED_URL}/api/auth/signin`, {
           username: userName,
           password: password

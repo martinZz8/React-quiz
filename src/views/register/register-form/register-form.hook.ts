@@ -137,7 +137,7 @@ const useRegisterForm = () => {
     return message.length === 0;
   };
 
-  const validatePasswordsIntegrity = ():boolean => {
+  const validatePasswordsIntegrity = (): boolean => {
     let messagePassword = "";
     let messagePasswordRepeat = "";
     if (registerInputs.password.localeCompare(registerInputs.passwordRepeat) !== 0) {

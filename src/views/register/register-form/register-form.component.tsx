@@ -6,8 +6,6 @@ import styles from "./register-form.module.scss";
 
 // hooks
 import useRegisterForm from "./register-form.hook";
-import {useTypedSelector} from "../../../hooks/useTypedSelector";
-import {useActions} from "../../../hooks/useActions";
 
 // components
 import InputField from "../../../components/ui/input-field/input-field.component";
@@ -141,7 +139,7 @@ const RegisterForm: React.FC = () => {
         </div>
         <div className={styles.privatePolicy}>
           <p>
-            Rejestrujc się w serwisie akceptujesz <Link to="#">Regulamin</Link>
+            Rejestrując się w serwisie akceptujesz <Link to="#">Regulamin</Link>
             <br/>
             oraz <Link to="#">Politykę Prywatności</Link>.
           </p>

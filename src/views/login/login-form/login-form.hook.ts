@@ -14,11 +14,12 @@ const useLoginForm = () => {
   const [loginInputs, setLoginInputs] = useState<ILoginInputs>(initialLoginInputs);
   const [errorLoginInputs, setErrorLoginInputs] = useState<IErrorLoginInputs>(initialErrorLoginInputs);
   const [isLiveValidation, setIsLiveValidation] = useState<boolean>(false);
-  const {loginUser, setLoginErrorMessage} = useActions();
+  const {loginUser, setLoginErrorMessage, setLoading} = useActions();
   const {loading: loadingLogin, error: errorLogin} = useTypedSelector(state => state.login);
 
   useEffect(() => {
-    setLoginErrorMessage("");
+    setLoginErrorMessage(null);
+    setLoading(false);
   },[]);
 
   // Live validating - userName

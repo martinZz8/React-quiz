@@ -9,6 +9,6 @@ import {
 export const useActions = () => {
   const dispatch = useDispatch();
   return bindActionCreators(Object.assign({},
-    loginUserActionCreators,
+    loginUserActionCreators
   ), dispatch);
 }
