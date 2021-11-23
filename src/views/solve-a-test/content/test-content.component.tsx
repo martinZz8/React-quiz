@@ -41,7 +41,7 @@ const TestContent: React.FC<ITestContent> = ({match}) => {
                     <div className={styles.counter}>
                       <p>Do zakończenia: {formatTimeToString(getTimeObject(timeLeft))}</p>
                     </div>
-                    :
+                  :
                     null
                 }
               </div>
