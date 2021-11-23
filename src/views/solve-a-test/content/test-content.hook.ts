@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 
 // hooks
-import useCounter from "../../../hooks/useCounter";
+import useTimer from "../../../hooks/useTimer";
 
 // interfaces
 import {ITestQuestion} from "./test.content.types";
@@ -11,7 +11,7 @@ const useTestContent = (testId: string) => {
   const [areTestQuestionsLoading, setAreTestQuestionsLoading] = useState<boolean>(false);
   const [isTestStarted, setIsTestStarted] = useState<boolean>(false);
   const [isTestSubmittedManually, setIsTestSubmittedManually] = useState<boolean>(false);
-  const {timeLeft, startTheTimer, endTheTimer} = useCounter();
+  const {timeLeft, startTheTimer, endTheTimer} = useTimer();
 
   // -- Receive the questions from backend API --
   useEffect(() => {

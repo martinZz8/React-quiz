@@ -4,7 +4,7 @@ import getMilliseconds from "../functions/get-milliseconds";
 // interfaces
 import {ITime} from "../types/time.types";
 
-const useCounter = () => {
+const useTimer = () => {
   const [timeLeft, setTimeLeft] = useState<number>(-1);
 
   // -- Manage the test counter every 1s --
@@ -33,4 +33,4 @@ const useCounter = () => {
   return {timeLeft, startTheTimer, endTheTimer};
 };
 
-export default useCounter;
+export default useTimer;
