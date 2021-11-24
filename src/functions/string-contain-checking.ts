@@ -5,7 +5,7 @@ const enum signCases {
   UNDEFINED
 }
 
-function checkSignCase(ch: string): number {
+const checkSignCase = (ch: string): number => {
   if (!isNaN(parseInt(ch))){
     return signCases.NUMERIC;
   }
@@ -22,7 +22,7 @@ function checkSignCase(ch: string): number {
 };
 
 export const doesStringContainOneOrMoreUpperCaseLetter = (strToCheck: string): boolean => {
-  for (let i = 0; i< strToCheck.length; i++) {
+  for (let i = 0; i < strToCheck.length; i++) {
     let signNumber = checkSignCase(strToCheck[i]);
     if (signNumber === signCases.UPPER_CASE) {
       return true;
@@ -33,7 +33,7 @@ export const doesStringContainOneOrMoreUpperCaseLetter = (strToCheck: string): b
 };
 
 export const doesStringContainOneOrMoreNumber = (strToCheck: string): boolean => {
-  for (let i = 0; i< strToCheck.length; i++) {
+  for (let i = 0; i < strToCheck.length; i++) {
     let signNumber = checkSignCase(strToCheck[i]);
     if (signNumber === signCases.NUMERIC) {
       return true;
