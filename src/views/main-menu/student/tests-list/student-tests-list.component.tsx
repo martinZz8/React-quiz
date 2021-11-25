@@ -55,7 +55,7 @@ const StudentTestsList: React.FC = () => {
               testsToShow.length > 0 ?
                 testsToShow.map(test => (
                   <SingleTest
-                    key = {test.id}
+                    key={test.id}
                     testToShow={test}
                     isActiveTestsView={isActiveTestsView}
                   />
