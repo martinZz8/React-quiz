@@ -14,14 +14,19 @@ import {store, persistor} from "./redux";
 // helmet provider
 import {HelmetProvider} from "react-helmet-async";
 
+// window size provider
+import WindowSizeProvider from "./contexts/window-size-provider.component";
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <HelmetProvider>
-          <Router>
-            <Root />
-          </Router>
+          <WindowSizeProvider>
+            <Router>
+              <Root />
+            </Router>
+          </WindowSizeProvider>
         </HelmetProvider>
       </PersistGate>
     </Provider>

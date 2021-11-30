@@ -1,4 +1,5 @@
 import React, {useRef} from "react";
+import {NavLink} from "react-router-dom";
 
 // styles
 import styles from "./user-menu.module.scss";
@@ -7,12 +8,12 @@ import styles from "./user-menu.module.scss";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 // hooks
-import useUserMenu from "./user-menu.hook";
 import {useActions} from "../../../hooks/useActions";
+import useUserMenu from "./user-menu.hook";
 import useOnClickOutside from "../../../hooks/useOnClickOutside.hook";
 
 const UserMenu: React.FC = () => {
-  const {isModalOpen, setIsModalOpen, toggleIsModalOpen} = useUserMenu();
+  const {isModalOpen, setIsModalOpen, toggleIsModalOpen, isMobileMenuOpen} = useUserMenu();
   const {logoutUser} = useActions();
   const {accessToken, user: {email, firstName, lastName, id: userId}} = useTypedSelector(state => state.login.loginData);
   const refModal = useRef<HTMLDivElement>(null);
@@ -23,8 +24,33 @@ const UserMenu: React.FC = () => {
       ref={refModal}
       className={styles.userMenu}
     >
+      <div className={styles.linksContainer}>
+        <NavLink
+          exact
+          to="/"
+          activeClassName={styles.activeLink}
+        >
+          Strona główna
+        </NavLink>
+        <div className={styles.divider}/>
+        <NavLink
+          exact
+          to="/utworz-pytanie"
+          activeClassName={styles.activeLink}
+        >
+          Utwórz pytanie
+        </NavLink>
+        <div className={styles.divider}/>
+        <NavLink
+          exact
+          to="/utworz-test"
+          activeClassName={styles.activeLink}
+        >
+          Utwórz test
+        </NavLink>
+      </div>
       <div
-        className={styles.menuContainer}
+        className={styles.userContainer}
         onClick={toggleIsModalOpen}
       >
         <div className={styles.dot}/>
@@ -40,6 +66,15 @@ const UserMenu: React.FC = () => {
             <p className="noSelect" onClick={() => logoutUser(userId, accessToken)}>
               Wyloguj
             </p>
+          </div>
+        :
+          null
+      }
+      {/*Mobile menu*/}
+      {
+        isMobileMenuOpen ?
+          <div className={styles.mobileMenu}>
+            {/*TO DO - create mobile menu*/}
           </div>
         :
           null
