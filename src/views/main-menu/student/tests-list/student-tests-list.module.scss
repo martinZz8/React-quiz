@@ -77,6 +77,7 @@
     justify-content: center;
     align-content: start;
     grid-gap: 16px;
+    position: relative;
 
     &.noTests {
       display: flex;

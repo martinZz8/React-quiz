@@ -4,6 +4,9 @@ import { Redirect, Route, Switch } from "react-router-dom";
 // hooks
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
+// functions
+import isUserType from "../../../functions/is-user-type";
+
 // views
 import ViewError from "../../error/error.component";
 import ViewStudentMainMenu from "../../main-menu/student/student-main-menu.component";
@@ -21,11 +24,22 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
   return (
     <Switch>
       {/*other routes*/}
+      {/*<Route*/}
+      {/*  exact*/}
+      {/*  path="/testy/wyniki/:id"*/}
+      {/*  component={() => (*/}
+      {/*    isUserType("student", userRoles) ?*/}
+      {/*      <ViewSolveATest appVersion={appVersion} />*/}
+      {/*      ://ROLE_TEACHER*/}
+      {/*      <Redirect to="/" />*/}
+      {/*  )*/}
+      {/*  }*/}
+      {/*/>*/}
       <Route
         exact
-        path="/rozwiaz-test/:id"
+        path="/testy/rozwiaz/:id"
         component={() => (
-          userRoles.includes("ROLE_USER") ?
+          isUserType("student", userRoles) ?
             <ViewSolveATest appVersion={appVersion} />
           ://ROLE_TEACHER
             <Redirect to="/" />
@@ -36,7 +50,7 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
         exact
         path="/"
         component={() => (
-            userRoles.includes("ROLE_USER") ?
+            isUserType("student", userRoles) ?
               <ViewStudentMainMenu appVersion={appVersion} />
             ://ROLE_TEACHER
               <ViewTeacherMainMenu appVersion={appVersion} />

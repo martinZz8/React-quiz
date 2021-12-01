@@ -11,7 +11,7 @@ import {ReactComponent as SVGMobileMenuClose} from "../../../assets/svg/mobile_m
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 // functions
-import HasUserRole from "../../../functions/has-user-role";
+import isUserType from "../../../functions/is-user-type";
 
 // hooks
 import {useActions} from "../../../hooks/useActions";
@@ -46,8 +46,8 @@ const UserMenu: React.FC = () => {
         }
       </div>
       <ClassicMenu
-        isStudent={HasUserRole("student", roles)}
-        isTeacher={HasUserRole("teacher", roles)}
+        isStudent={isUserType("student", roles)}
+        isTeacher={isUserType("teacher", roles)}
       />
       <div
         ref={refModal}
@@ -74,7 +74,7 @@ const UserMenu: React.FC = () => {
                 Wyloguj
               </p>
             </div>
-            :
+          :
             null
         }
       </div>
@@ -83,6 +83,8 @@ const UserMenu: React.FC = () => {
         isMobileMenuOpen ?
           <MobileMenu
             onOutClick={() => setIsMobileMenuOpen(false)}
+            isStudent={isUserType("student", roles)}
+            isTeacher={isUserType("teacher", roles)}
           />
         :
           null

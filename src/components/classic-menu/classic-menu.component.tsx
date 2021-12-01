@@ -6,8 +6,8 @@ import styles from "./classic-menu.module.scss";
 
 // interfaces
 interface IClassicMenu {
-  isStudent?: boolean;
-  isTeacher?: boolean;
+  isStudent: boolean;
+  isTeacher: boolean;
 }
 
 const ClassicMenu: React.FC<IClassicMenu> = ({isStudent, isTeacher}) => {

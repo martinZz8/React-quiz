@@ -22,10 +22,10 @@ const SingleTest: React.FC<ISingleTest> = ({history, testToShow, isActiveTestsVi
       className={styles.singleTest}
       onClick={() => {
         if (isActiveTestsView) {
-          history.push(`/rozwiaz-test/${testToShow.id}`);
+          history.push(`/testy/rozwiaz/${testToShow.id}`);
         }
         else {
-          history.push(`/wyniki-testu/${testToShow.id}`);
+          history.push(`/testy/wyniki/${testToShow.id}`);
         }
       }}
     >
