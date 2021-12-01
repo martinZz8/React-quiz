@@ -15,7 +15,7 @@ import {store, persistor} from "./redux";
 import {HelmetProvider} from "react-helmet-async";
 
 // window size provider
-import WindowSizeProvider from "./contexts/window-size-provider.component";
+import WindowSizeProvider from "./providers/window-size-provider.component";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,0 +1,72 @@
+@import "src/styles/variables";
+
+@mixin anchorTag() {
+  a, p {
+    width: 100%;
+    height: auto;
+    font-size: 15px;
+    font-weight: 700;
+    font-style: normal;
+    color: $colorBlack;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 0;
+
+    &.activeLink {
+      color: $colorDarkPurple;
+    }
+
+    &:hover {
+      color: $colorDarkerPurple;
+      text-decoration: underline;
+    }
+  }
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: $colorLightGray;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding-top: 70px;
+  overflow-y: scroll;
+
+  .menuItem {
+    width: 100%;
+    height: auto;
+    background-color: $colorLightPurple;
+    border-bottom: 2px solid $colorDarkGray;
+
+    @include anchorTag;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  .menuSubItem {
+    width: 100%;
+    height: auto;
+    background-color: $colorLighterPurple;
+    border-bottom: 2px solid $colorLightGray;
+
+    @include anchorTag;
+
+    &:first-of-type {
+      border-top: 2px solid $colorLightGray;
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import {useState, useEffect, useContext} from "react";
 
 // context
-import {WindowContext} from "../../../contexts/window-size-provider.component";
+import {WindowContext} from "../../../providers/window-size-provider.component";
 
 const useUserMenu = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -18,7 +18,11 @@ const useUserMenu = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  return {isModalOpen, setIsModalOpen, toggleIsModalOpen, isMobileMenuOpen};
+  const toggleIsMobileMenuOpen = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  return {isModalOpen, setIsModalOpen, toggleIsModalOpen, isMobileMenuOpen, setIsMobileMenuOpen, toggleIsMobileMenuOpen};
 };
 
 export default useUserMenu;

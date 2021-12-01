@@ -1,0 +1,89 @@
+@import "src/styles/variables";
+
+@mixin anchorTag() {
+  a {
+    font-size: 15px;
+    font-weight: 700;
+    font-style: normal;
+    color: $colorBlack;
+
+    &.activeLink {
+      color: $colorDarkPurple;
+    }
+
+    &:hover {
+      color: $colorDarkerPurple;
+      text-decoration: underline;
+    }
+  }
+}
+
+.classicMenu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  visibility: collapse;
+
+  .mainLink {
+    padding: 0 5px;
+    border-right: 2px solid $colorDarkGray;
+    position: relative;
+
+    &:last-of-type {
+      border-right: none;
+    }
+
+    &:hover {
+      .rolledMenu {
+        display: flex;
+      }
+    }
+
+    @include anchorTag();
+
+    .rolledMenu {
+      display: none;
+      width: 150px;
+      height: auto;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      background-color: $colorLighterPurple;
+      border: 2px solid $colorDarkGray;
+      border-radius: 4px;
+
+      .item {
+        width: 100%;
+        height: auto;
+        border-bottom: 2px solid $colorDarkGray;
+
+        @include anchorTag();
+
+        a {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 10px 0;
+        }
+
+        &:last-of-type {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .classicMenu {
+    visibility: visible;
+  }
+}
