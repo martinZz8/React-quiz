@@ -12,6 +12,7 @@ import ViewError from "../../error/error.component";
 import ViewStudentMainMenu from "../../main-menu/student/student-main-menu.component";
 import ViewTeacherMainMenu from "../../main-menu/teacher/teacher-main-menu.component";
 import ViewSolveATest from "../../solve-a-test/solve-a-test.component";
+import AddNewQuestion from "../../add-new-question/add-new-question.component";
 
 // interfaces
 interface IAuthenticatedApp {
@@ -23,6 +24,17 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
 
   return (
     <Switch>
+      <Route
+        exact
+        path="/pytania/dodaj"
+        component={() => (
+          isUserType("teacher", userRoles) ?
+            <AddNewQuestion appVersion={appVersion} />
+          ://ROLE_USER
+            <Redirect to="/" />
+        )
+        }
+      />
       {/*other routes*/}
       {/*<Route*/}
       {/*  exact*/}

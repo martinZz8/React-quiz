@@ -1,0 +1,54 @@
+@import "src/styles/variables";
+
+.addNewQuestionForm {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px 60px;
+
+  .row {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 3px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .item {
+      width: 100%;
+      height: auto;
+      margin-bottom: 3px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media(min-width: 800px) {
+  .addNewQuestionForm {
+    .row {
+      flex-direction: row;
+      justify-content: space-between;
+
+      .item {
+        width: 47%;
+        margin-bottom: 0;
+
+        &.fullWidth {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
