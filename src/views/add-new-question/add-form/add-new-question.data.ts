@@ -1,11 +1,19 @@
 // interfaces
-import {INewQuestionInput, ISelectQuestionData, INewAnswerInput} from "./add-new-question.types";
+import {INewQuestionInput, ISelectQuestionData, INewAnswerInput, INewQuestionInputErrors} from "./add-new-question.types";
 
 export const initialNewQuestionInputs: INewQuestionInput = {
-  points: 0,
+  points: "0",
   question: "",
   type: "",
   answers: []
+};
+
+export const initialNewQuestionInputsErrors: INewQuestionInputErrors = {
+  points: "",
+  question: "",
+  type: "",
+  answers: "",
+  APIError: ""
 };
 
 export const initialNewAnswerInput: INewAnswerInput = {

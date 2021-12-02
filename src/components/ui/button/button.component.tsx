@@ -7,7 +7,7 @@ import styles from "./button.module.scss";
 interface IButton {
   type: "submit" | "button";
   title: string;
-  backgroundColor: "purple" | "lightPurple" | "black";
+  backgroundColor: "purple" | "lightPurple" | "black" | "red";
   fontColor: "white";
   handleClick?: () => void;
   disabled?: boolean;
@@ -17,7 +17,7 @@ interface IButton {
 const Button: React.FC<IButton> = ({
     type, title, backgroundColor, fontColor, handleClick, disabled, noBorderRadius
   }) => {
-  const stylesBackgroundColor = backgroundColor === "lightPurple" ? styles.backgroundColorLightPurple : backgroundColor === "purple" ? styles.backgroundColorPurple : styles.backgroundColorBlack;
+  const stylesBackgroundColor = backgroundColor === "lightPurple" ? styles.backgroundColorLightPurple : backgroundColor === "purple" ? styles.backgroundColorPurple : backgroundColor === "red" ? styles.backgroundColorRed : styles.backgroundColorBlack;
   const stylesFontColor = fontColor === "white" ? styles.fontColorWhite : styles.fontColorWhite;
   const hoverColors =
     fontColor === "white" ?
@@ -25,6 +25,8 @@ const Button: React.FC<IButton> = ({
         styles.hoverColorsLightPurple
       : backgroundColor === "purple" ?
           styles.hoverColorsPurple
+      : backgroundColor === "red" ?
+        styles.hoverColorsRed
       :
         styles.hoverColorsBlack
     :

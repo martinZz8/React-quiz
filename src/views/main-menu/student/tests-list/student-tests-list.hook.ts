@@ -82,6 +82,7 @@ const useStudentTestsList = () => {
     // ];
 
     fetch(`${process.env.REACT_APP_BACKED_URL}/api/tests/${isActiveTestsView ? "active" : "nonactive"}`, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,

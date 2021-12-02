@@ -27,6 +27,10 @@
       background-color: $colorSemiDarkPurple;
     }
 
+    &.backgroundColorRed {
+      background-color: $colorRed;
+    }
+
     &.backgroundColorBlack {
       background-color: $colorBlack;
     }
@@ -44,6 +48,13 @@
     &.hoverColorsPurple {
       &:hover {
         background-color: $colorLightPurple;
+      }
+    }
+
+    &.hoverColorsRed {
+      &:hover {
+        color: $colorBlack;
+        background-color: $colorLightRed;
       }
     }
 
