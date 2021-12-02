@@ -61,9 +61,17 @@ const useAddNewQuestionForm = () => {
   };
 
   const handleNewQuestionInput = (name: string, value: string) => {
+    let valToSet = value;
+    if (name === "points") {
+      let dotIndex = valToSet.indexOf(".");
+      if (dotIndex !== -1) {
+        valToSet = valToSet.substring(0, dotIndex);
+      }
+    }
+
     setNewQuestionInput(prev => ({
       ...prev,
-      [name]: value
+      [name]: valToSet
     }));
   };
 

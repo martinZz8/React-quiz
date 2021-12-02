@@ -9,6 +9,10 @@
   align-items: flex-start;
   margin: 7px 10px;
 
+  &.extendedSize {
+    height: 95%;
+  }
+
   .header {
     width: 100%;
     height: auto;
@@ -40,5 +44,10 @@
   .container {
     width: 851px;
     height: 80%;
+
+    &.extendedSize {
+      width: 1000px;
+      height: 90%;
+    }
   }
 }

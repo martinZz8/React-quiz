@@ -1,0 +1,33 @@
+@import "src/styles/variables";
+
+.showQuestionsSearchBar {
+  width: 100%;
+  height: auto;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-bottom: 1px solid $colorBlack;
+
+  .questionInputWrap, .typeSelectWrap {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (min-width: 700px) {
+  .showQuestionsSearchBar {
+    flex-direction: row;
+    align-items: center;
+    grid-column-gap: 20px;
+
+    .questionInputWrap {
+      width: 400px;
+    }
+
+    .typeSelectWrap {
+      width: 200px;
+    }
+  }
+}

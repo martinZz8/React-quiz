@@ -6,12 +6,13 @@ import styles from "./content-card.module.scss";
 // interfaces
 interface ITemplateContentCard {
   title?: string | ReactElement;
+  extendedSize?: boolean;
 }
 
-const TemplateContentCard: React.FC<ITemplateContentCard> = ({title, children}) => {
+const TemplateContentCard: React.FC<ITemplateContentCard> = ({title, children, extendedSize}) => {
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${extendedSize ? styles.extendedSize : ""}`}>
       {
         title ?
           <div className={styles.header}>

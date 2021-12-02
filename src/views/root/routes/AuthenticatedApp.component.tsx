@@ -13,6 +13,7 @@ import ViewStudentMainMenu from "../../main-menu/student/student-main-menu.compo
 import ViewTeacherMainMenu from "../../main-menu/teacher/teacher-main-menu.component";
 import ViewSolveATest from "../../solve-a-test/solve-a-test.component";
 import AddNewQuestion from "../../add-new-question/add-new-question.component";
+import ShowQuestions from "../../show-questions/show-questions.component";
 
 // interfaces
 interface IAuthenticatedApp {
@@ -26,10 +27,32 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
     <Switch>
       <Route
         exact
+        path="/pytania/edytuj/:id"
+        component={() => (
+          isUserType("teacher", userRoles) ?
+            <></> //TO DO
+          ://ROLE_USER
+            <Redirect to="/" />
+        )
+        }
+      />
+      <Route
+        exact
         path="/pytania/dodaj"
         component={() => (
           isUserType("teacher", userRoles) ?
             <AddNewQuestion appVersion={appVersion} />
+          ://ROLE_USER
+            <Redirect to="/" />
+        )
+        }
+      />
+      <Route
+        exact
+        path="/pytania"
+        component={() => (
+          isUserType("teacher", userRoles) ?
+            <ShowQuestions appVersion={appVersion} />
           ://ROLE_USER
             <Redirect to="/" />
         )
