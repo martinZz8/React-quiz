@@ -14,11 +14,11 @@ const useShowQuestionsContent = () => {
   const [filteredQuestions, setFilteredQuestions] = useState<IQuestion[]>([]);
   const [searchBarInputs, setSearchBarInputs] = useState<ISearchBarInputs>(initialISearchBarInputs);
   const [areQuestionsLoading, setAreQuestionsLoading] = useState<boolean>(false);
-  const [isDeletingQuestionProcessing, setIsDeletingQuestionProcessing] = useState<boolean>(false);
 
   // Delete modal states
   const [isDeleteQuestionModalOpened, setIsDeleteQuestionModalOpened] = useState<boolean>(false);
   const [questionIdToBeDeleted ,setQuestionIdToBeDeleted] = useState<number>(0);
+  const [isDeletingQuestionProcessing, setIsDeletingQuestionProcessing] = useState<boolean>(false);
 
   const accessToken = useTypedSelector(state => state.login.loginData.accessToken);
 

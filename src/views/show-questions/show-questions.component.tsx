@@ -11,11 +11,11 @@ import TemplateContentCenter from "../../templates/content-center/content-center
 import ShowQuestionsContent from "./content/show-questions-content.component";
 
 // interfaces
-interface IShowQuestions {
+interface IViewShowQuestions {
   appVersion: string;
 }
 
-const ShowQuestions:React.FC<IShowQuestions> = ({appVersion}) => {
+const ViewShowQuestions:React.FC<IViewShowQuestions> = ({appVersion}) => {
 
   return (
     <TemplateView appVersion={appVersion} viewTitle="Twoje pytania">
@@ -26,4 +26,4 @@ const ShowQuestions:React.FC<IShowQuestions> = ({appVersion}) => {
   );
 };
 
-export default ShowQuestions;
+export default ViewShowQuestions;

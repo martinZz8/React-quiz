@@ -5,7 +5,7 @@ import {RouteComponentProps, withRouter} from "react-router";
 import styles from "./add-new-question-form.module.scss";
 
 // data
-import {selectQuestionTypeOptions} from "./add-new-question.data";
+import {selectQuestionTypeOptions} from "./add-new-question-form.data";
 
 // templates
 import TemplateContentCard from "../../../templates/content-card/content-card.template";

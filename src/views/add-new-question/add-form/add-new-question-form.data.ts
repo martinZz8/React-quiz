@@ -1,7 +1,7 @@
 // interfaces
-import {INewQuestionInput, ISelectQuestionData, INewAnswerInput, INewQuestionInputErrors} from "./add-new-question.types";
+import {INewQuestionInput, ISelectQuestionData, INewAnswerInput, INewQuestionInputErrors} from "./add-new-question-form.types";
 
-export const initialNewQuestionInputs: INewQuestionInput = {
+export const initialNewQuestionInput: INewQuestionInput = {
   points: "0",
   question: "",
   type: "",

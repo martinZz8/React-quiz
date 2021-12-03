@@ -12,8 +12,9 @@ import ViewError from "../../error/error.component";
 import ViewStudentMainMenu from "../../main-menu/student/student-main-menu.component";
 import ViewTeacherMainMenu from "../../main-menu/teacher/teacher-main-menu.component";
 import ViewSolveATest from "../../solve-a-test/solve-a-test.component";
-import AddNewQuestion from "../../add-new-question/add-new-question.component";
-import ShowQuestions from "../../show-questions/show-questions.component";
+import ViewAddNewQuestion from "../../add-new-question/add-new-question.component";
+import ViewShowQuestions from "../../show-questions/show-questions.component";
+import ViewAddNewTest from "../../add-new-test/add-new-test.component";
 
 // interfaces
 interface IAuthenticatedApp {
@@ -25,13 +26,14 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
 
   return (
     <Switch>
+      {/*Questions*/}
       <Route
         exact
         path="/pytania/edytuj/:id"
         component={() => (
           isUserType("teacher", userRoles) ?
-            <AddNewQuestion appVersion={appVersion} isQuestionEdit/>
-          ://ROLE_USER
+            <ViewAddNewQuestion appVersion={appVersion} isQuestionEdit/>
+          ://STUDENT
             <Redirect to="/" />
         )
         }
@@ -41,8 +43,8 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
         path="/pytania/dodaj"
         component={() => (
           isUserType("teacher", userRoles) ?
-            <AddNewQuestion appVersion={appVersion} />
-          ://ROLE_USER
+            <ViewAddNewQuestion appVersion={appVersion} />
+          ://STUDENT
             <Redirect to="/" />
         )
         }
@@ -52,20 +54,21 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
         path="/pytania"
         component={() => (
           isUserType("teacher", userRoles) ?
-            <ShowQuestions appVersion={appVersion} />
-          ://ROLE_USER
+            <ViewShowQuestions appVersion={appVersion} />
+          ://STUDENT
             <Redirect to="/" />
         )
         }
       />
+      {/*Tests*/}
       {/*other routes*/}
       {/*<Route*/}
       {/*  exact*/}
       {/*  path="/testy/wyniki/:id"*/}
       {/*  component={() => (*/}
       {/*    isUserType("student", userRoles) ?*/}
-      {/*      <ViewSolveATest appVersion={appVersion} />*/}
-      {/*      ://ROLE_TEACHER*/}
+      {/*      <ViewTestResult appVersion={appVersion} />*/}
+      {/*    ://TEACHER*/}
       {/*      <Redirect to="/" />*/}
       {/*  )*/}
       {/*  }*/}
@@ -76,7 +79,29 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
         component={() => (
           isUserType("student", userRoles) ?
             <ViewSolveATest appVersion={appVersion} />
-          ://ROLE_TEACHER
+          ://TEACHER
+            <Redirect to="/" />
+        )
+        }
+      />
+      <Route
+        exact
+        path="/testy/edytuj/:id"
+        component={() => (
+          isUserType("teacher", userRoles) ?
+            <ViewAddNewTest appVersion={appVersion} isTestEdit/>
+          ://STUDENT
+            <Redirect to="/" />
+        )
+        }
+      />
+      <Route
+        exact
+        path="/testy/dodaj"
+        component={() => (
+          isUserType("teacher", userRoles) ?
+            <ViewAddNewTest appVersion={appVersion} />
+          ://STUDENT
             <Redirect to="/" />
         )
         }
@@ -85,10 +110,10 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
         exact
         path="/"
         component={() => (
-            isUserType("student", userRoles) ?
-              <ViewStudentMainMenu appVersion={appVersion} />
-            ://ROLE_TEACHER
-              <ViewTeacherMainMenu appVersion={appVersion} />
+          isUserType("student", userRoles) ?
+            <ViewStudentMainMenu appVersion={appVersion} />
+          ://TEACHER
+            <ViewTeacherMainMenu appVersion={appVersion} />
           )
         }
       />

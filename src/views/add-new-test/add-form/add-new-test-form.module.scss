@@ -1,0 +1,117 @@
+@import "src/styles/variables";
+
+.addNewTestForm {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px 10px;
+  position: relative;
+
+  &.forbidden {
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: 20px;
+      font-weight: 700;
+      font-style: normal;
+      color: $colorBlack;
+      text-align: center;
+    }
+  }
+
+  .row {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 3px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .item {
+      width: 100%;
+      height: auto;
+      margin-bottom: 3px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      &.messageBoxWrap {
+        margin-top: 20px;
+        height: 40px;
+
+        .messageBox {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 12px;
+
+          p {
+            font-size: 14px;
+            font-weight: 600;
+            font-style: normal;
+            text-align: center;
+          }
+
+          &.successMessage {
+            background-color: $colorLemonGreen;
+
+            p {
+              color: $colorBlack;
+            }
+          }
+
+          &.errorMessage {
+            background-color: $colorRed;
+
+            p {
+              color: $colorWhite;
+            }
+          }
+        }
+      }
+
+      &.submitButtonWrap {
+        margin-top: 20px;
+        height: 40px;
+      }
+    }
+  }
+}
+
+@media(min-width: 800px) {
+  .addNewTestForm {
+    padding-left: 60px;
+    padding-right: 60px;
+
+    .row {
+      flex-direction: row;
+      justify-content: space-between;
+
+      .item {
+        width: 33%;
+        margin-bottom: 0;
+
+        &.doubleItemsWidth {
+          width: 47%;
+        }
+
+        &.fullWidth {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

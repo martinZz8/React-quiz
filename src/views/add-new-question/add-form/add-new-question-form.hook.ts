@@ -4,14 +4,14 @@ import React, {useState, useEffect} from "react";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 // data
-import {initialNewQuestionInputs, initialNewAnswerInput, initialNewQuestionInputsErrors} from "./add-new-question.data";
+import {initialNewQuestionInput, initialNewAnswerInput, initialNewQuestionInputsErrors} from "./add-new-question-form.data";
 
 // interfaces
-import {INewQuestionInput, INewAnswerInput, INewQuestionInputErrors} from "./add-new-question.types";
+import {INewQuestionInput, INewAnswerInput, INewQuestionInputErrors} from "./add-new-question-form.types";
 import {IQuestionAnswer} from "../../../types/question.types";
 
 const useAddNewQuestionForm = (questionId: string, isQuestionEdit?: boolean) => {
-  const [newQuestionInput, setNewQuestionInput] = useState<INewQuestionInput>(initialNewQuestionInputs);
+  const [newQuestionInput, setNewQuestionInput] = useState<INewQuestionInput>(initialNewQuestionInput);
   const [newAnswerInput, setNewAnswerInput] = useState<INewAnswerInput>(initialNewAnswerInput);
   const [openedEditAnswersIds, setOpenedEditAnswersIds] = useState<number[]>([]);
   const [newQuestionInputErrors, setNewQuestionInputErrors] = useState<INewQuestionInputErrors>(initialNewQuestionInputsErrors);
@@ -24,9 +24,9 @@ const useAddNewQuestionForm = (questionId: string, isQuestionEdit?: boolean) => 
 
   const accessToken = useTypedSelector(state => state.login.loginData.accessToken);
 
-  useEffect(() => {
-    console.log("newQuestionInput", newQuestionInput);
-  },[newQuestionInput]);
+  // useEffect(() => {
+  //   console.log("newQuestionInput", newQuestionInput);
+  // },[newQuestionInput]);
 
   // Load question if it's question edit view
   useEffect(() => {

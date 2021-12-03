@@ -5,7 +5,7 @@ import styles from "./input-field.module.scss";
 
 // interfaces
 interface IInputField {
-  type: "text" | "password" | "email" | "number";
+  type: "text" | "password" | "email" | "number" | "date" | "datetime-local";
   name: string;
   value: string;
   label?: string;

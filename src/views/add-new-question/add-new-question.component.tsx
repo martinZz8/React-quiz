@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 
 // styles
 import styles from "./add-new-questions.module.scss";
@@ -11,12 +11,12 @@ import TemplateContentCenter from "../../templates/content-center/content-center
 import AddNewQuestionForm from "./add-form/add-new-question-form.component";
 
 // interfaces
-interface IAddNewQuestion {
+interface IViewAddNewQuestion {
   appVersion: string;
   isQuestionEdit?: boolean;
 }
 
-const AddNewQuestion:React.FC<IAddNewQuestion> = ({appVersion, isQuestionEdit}) => {
+const ViewAddNewQuestion: React.FC<IViewAddNewQuestion> = ({appVersion, isQuestionEdit}) => {
 
   return (
     <TemplateView appVersion={appVersion} viewTitle={!isQuestionEdit ? "Nowe pytanie" : "Edytuj pytanie"}>
@@ -27,4 +27,4 @@ const AddNewQuestion:React.FC<IAddNewQuestion> = ({appVersion, isQuestionEdit}) 
   );
 };
 
-export default AddNewQuestion;
+export default ViewAddNewQuestion;
