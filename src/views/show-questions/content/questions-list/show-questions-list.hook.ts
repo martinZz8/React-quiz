@@ -19,7 +19,10 @@ const useShowQuestionsList = () => {
     }
   };
 
-  return {openedQuestionsIds, toggleOpenedQuestionsIds};
+  return {
+    openedQuestionsIds,
+    toggleOpenedQuestionsIds
+  };
 };
 
 export default useShowQuestionsList;

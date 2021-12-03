@@ -13,9 +13,20 @@ import useShowQuestionsContent from "./show-questions-content.hook";
 import LoadingModal from "../../../modals/loading-modal/loading-modal.component";
 import ShowQuestionsSearchBar from "./search-bar/show-questions-search-bar.component";
 import ShowQuestionsList from "./questions-list/show-questions-list.component";
+import DeleteItemModal from "../../../modals/delete-item-modal/delete-question-modal.component";
 
 const ShowQuestionsContent: React.FC = () => {
-  const {filteredQuestions, searchBarInputs, areQuestionsLoading, handleSearchBarInputs} = useShowQuestionsContent();
+  const {
+    filteredQuestions,
+    searchBarInputs,
+    areQuestionsLoading,
+    handleSearchBarInputs,
+    isDeleteQuestionModalOpened,
+    setIsDeleteQuestionModalOpened,
+    setQuestionIdToBeDeleted,
+    deleteQuestion,
+    isDeletingQuestionProcessing
+  } = useShowQuestionsContent();
 
   return (
     <TemplateContentCard
@@ -32,10 +43,23 @@ const ShowQuestionsContent: React.FC = () => {
               />
               <ShowQuestionsList
                 filteredQuestions={filteredQuestions}
+                setIsDeleteQuestionModalOpened={setIsDeleteQuestionModalOpened}
+                setQuestionIdToBeDeleted={setQuestionIdToBeDeleted}
               />
             </>
           :
             <LoadingModal/>
+        }
+        {
+          isDeleteQuestionModalOpened ?
+            <DeleteItemModal
+              title="Czy chcesz usunąć pytanie?"
+              onConfirmClick={deleteQuestion}
+              onDeclineClick={() => setIsDeleteQuestionModalOpened(false)}
+              isDeleteProcessing={isDeletingQuestionProcessing}
+            />
+          :
+            null
         }
       </div>
     </TemplateContentCard>

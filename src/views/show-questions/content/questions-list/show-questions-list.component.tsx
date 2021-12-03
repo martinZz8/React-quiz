@@ -13,7 +13,7 @@ import useShowQuestionsList from "./show-questions-list.hook";
 // functions
 import translateQuestionType from "../../../../functions/translate-question-type";
 
-// componenets
+// components
 import Button from "../../../../components/ui/button/button.component";
 
 // interfaces
@@ -21,10 +21,20 @@ import {IQuestion} from "../show-qeustions-content.types";
 
 interface IShowQuestionsList extends RouteComponentProps<any> {
   filteredQuestions: IQuestion[];
+  setIsDeleteQuestionModalOpened: (val: boolean) => void;
+  setQuestionIdToBeDeleted: (id: number) => void;
 }
 
-const ShowQuestionsList: React.FC<IShowQuestionsList> = ({filteredQuestions, history}) => {
-  const {openedQuestionsIds, toggleOpenedQuestionsIds} = useShowQuestionsList();
+const ShowQuestionsList: React.FC<IShowQuestionsList> = ({
+   filteredQuestions,
+   history,
+   setIsDeleteQuestionModalOpened,
+   setQuestionIdToBeDeleted
+  }) => {
+  const {
+    openedQuestionsIds,
+    toggleOpenedQuestionsIds
+  } = useShowQuestionsList();
 
   return (
     <div className={`customScrollBar ${styles.showQuestionsList} ${filteredQuestions.length === 0 ? styles.noQuestions : ""}`}>
@@ -96,6 +106,18 @@ const ShowQuestionsList: React.FC<IShowQuestionsList> = ({filteredQuestions, his
                           backgroundColor="lightPurple"
                           title="Edytuj"
                           handleClick={() => history.push(`/pytania/edytuj/${question.id}`)}
+                        />
+                      </div>
+                      <div className={styles.deleteButtonWrap}>
+                        <Button
+                          type="button"
+                          fontColor="white"
+                          backgroundColor="red"
+                          title="Usuń"
+                          handleClick={() => {
+                            setQuestionIdToBeDeleted(question.id);
+                            setIsDeleteQuestionModalOpened(true);
+                          }}
                         />
                       </div>
                     </div>

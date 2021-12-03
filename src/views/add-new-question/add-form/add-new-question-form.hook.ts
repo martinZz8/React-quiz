@@ -10,7 +10,7 @@ import {initialNewQuestionInputs, initialNewAnswerInput, initialNewQuestionInput
 import {INewQuestionInput, INewAnswerInput, INewQuestionInputErrors} from "./add-new-question.types";
 import {IQuestionAnswer} from "../../../types/question.types";
 
-const useAddNewQuestionForm = () => {
+const useAddNewQuestionForm = (questionId: string, isQuestionEdit?: boolean) => {
   const [newQuestionInput, setNewQuestionInput] = useState<INewQuestionInput>(initialNewQuestionInputs);
   const [newAnswerInput, setNewAnswerInput] = useState<INewAnswerInput>(initialNewAnswerInput);
   const [openedEditAnswersIds, setOpenedEditAnswersIds] = useState<number[]>([]);
@@ -18,19 +18,53 @@ const useAddNewQuestionForm = () => {
   const [isSuccessCreation, setIsSuccessCreation] = useState<boolean>(false);
   const [isLiveValidation, setIsLiveValidation] = useState<boolean>(false);
 
+  // States for question editing
+  const [isQuestionForEditLoading, setIsQuestionForEditLoading] = useState<boolean>(false);
+  const [isQuestionForEditForbidden, setIsQuestionForEditForbidden] = useState<boolean>(false);
+
   const accessToken = useTypedSelector(state => state.login.loginData.accessToken);
 
-  // useEffect(() => {
-  //   console.log("newQuestionInput", newQuestionInput);
-  // },[newQuestionInput]);
-
-  // Reset the answers when changes the type of answer
   useEffect(() => {
-    setNewQuestionInput(prev => ({
-      ...prev,
-      answers: []
-    }));
-  }, [newQuestionInput.type]);
+    console.log("newQuestionInput", newQuestionInput);
+  },[newQuestionInput]);
+
+  // Load question if it's question edit view
+  useEffect(() => {
+    if (isQuestionEdit) {
+      setIsQuestionForEditLoading(true);
+      fetch(`${process.env.REACT_APP_BACKED_URL}/api/questions/${questionId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        }
+      })
+        .then(async response => {
+          if (response.ok) {
+            let data = await response.json();
+            setNewQuestionInput({
+              question: data.text,
+              points: data.points,
+              type: data.type,
+              answers: data.answers.map((answer: any, index: number) => ({
+                id: index+1,
+                correct: answer.correct,
+                answer: answer.text
+              }))
+            });
+            setIsQuestionForEditLoading(false);
+          }
+          else {
+            setIsQuestionForEditForbidden(true);
+            setIsQuestionForEditLoading(false);
+          }
+        })
+        .catch(error => {
+          setIsQuestionForEditForbidden(true);
+          setIsQuestionForEditLoading(false);
+        });
+    }
+  },[]);
 
   // Live validation
   useEffect(() => {
@@ -135,6 +169,14 @@ const useAddNewQuestionForm = () => {
     }
   };
 
+  // Reset the answers when changes the type of answer
+  const resetAnswers = () => {
+    setNewQuestionInput(prev => ({
+      ...prev,
+      answers: []
+    }));
+  };
+
   const addAnswer = () => {
     setNewQuestionInput(prev => ({
       ...prev,
@@ -164,7 +206,7 @@ const useAddNewQuestionForm = () => {
         answers: copyAnswers
       }));
 
-      // Remove index in openedEditAnswersIds
+      // Remove id in openedEditAnswersIds
       let foundIndexOfOpenedEditAnswersIds = openedEditAnswersIds.findIndex(itemId => itemId === id);
       if (foundIndexOfOpenedEditAnswersIds !== -1) {
         let copyOpenedEditAnswersIds = [...openedEditAnswersIds];
@@ -311,8 +353,8 @@ const useAddNewQuestionForm = () => {
     }
 
     if (canSubmit) {
-      fetch(`${process.env.REACT_APP_BACKED_URL}/api/questions`, {
-        method: 'POST',
+      fetch(`${process.env.REACT_APP_BACKED_URL}/api/questions${isQuestionEdit ? `/${questionId}` : ""}`, {
+        method: !isQuestionEdit ? 'POST' : 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`,
@@ -361,7 +403,10 @@ const useAddNewQuestionForm = () => {
     openedEditAnswersIds,
     toggleOpenedAnswersIds,
     newQuestionInputErrors,
-    isSuccessCreation
+    isSuccessCreation,
+    resetAnswers,
+    isQuestionForEditLoading,
+    isQuestionForEditForbidden
   };
 };
 

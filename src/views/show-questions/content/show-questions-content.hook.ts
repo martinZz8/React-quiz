@@ -14,6 +14,11 @@ const useShowQuestionsContent = () => {
   const [filteredQuestions, setFilteredQuestions] = useState<IQuestion[]>([]);
   const [searchBarInputs, setSearchBarInputs] = useState<ISearchBarInputs>(initialISearchBarInputs);
   const [areQuestionsLoading, setAreQuestionsLoading] = useState<boolean>(false);
+  const [isDeletingQuestionProcessing, setIsDeletingQuestionProcessing] = useState<boolean>(false);
+
+  // Delete modal states
+  const [isDeleteQuestionModalOpened, setIsDeleteQuestionModalOpened] = useState<boolean>(false);
+  const [questionIdToBeDeleted ,setQuestionIdToBeDeleted] = useState<number>(0);
 
   const accessToken = useTypedSelector(state => state.login.loginData.accessToken);
 
@@ -88,7 +93,51 @@ const useShowQuestionsContent = () => {
     }));
   };
 
-  return {filteredQuestions, searchBarInputs, areQuestionsLoading, handleSearchBarInputs};
+  const deleteQuestion = () => {
+    setIsDeletingQuestionProcessing(true);
+    fetch(`${process.env.REACT_APP_BACKED_URL}/api/questions/${questionIdToBeDeleted}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      }
+    })
+    .then(async response => {
+      if (response.ok) {
+        // Delete this question locally
+        let foundIndex = questions.findIndex(question => question.id === questionIdToBeDeleted);
+        if (foundIndex !== -1) {
+          let copyQuestions = [...questions];
+          copyQuestions.splice(foundIndex, 1);
+          setQuestions(copyQuestions);
+        }
+        // Close modal
+        setIsDeletingQuestionProcessing(false);
+        setIsDeleteQuestionModalOpened(false);
+      }
+      else {
+        setIsDeletingQuestionProcessing(false);
+        setIsDeleteQuestionModalOpened(false);
+        console.log("error during question delete");
+      }
+    })
+    .catch(error => {
+      setIsDeletingQuestionProcessing(false);
+      setIsDeleteQuestionModalOpened(false);
+      console.log("error during question delete");
+    });
+  };
+
+  return {filteredQuestions,
+    searchBarInputs,
+    areQuestionsLoading,
+    handleSearchBarInputs,
+    isDeleteQuestionModalOpened,
+    setIsDeleteQuestionModalOpened,
+    setQuestionIdToBeDeleted,
+    deleteQuestion,
+    isDeletingQuestionProcessing
+  };
 };
 
 export default useShowQuestionsContent;

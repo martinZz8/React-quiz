@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  z-index: 99;
 
   &.noQuestions {
     justify-content: center;
@@ -128,6 +129,11 @@
         }
 
         .editButtonWrap {
+          width: 90px;
+          height: 35px;
+        }
+
+        .deleteButtonWrap {
           width: 90px;
           height: 35px;
         }

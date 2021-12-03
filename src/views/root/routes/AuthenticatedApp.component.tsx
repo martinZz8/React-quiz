@@ -30,7 +30,7 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
         path="/pytania/edytuj/:id"
         component={() => (
           isUserType("teacher", userRoles) ?
-            <></> //TO DO
+            <AddNewQuestion appVersion={appVersion} isQuestionEdit/>
           ://ROLE_USER
             <Redirect to="/" />
         )
