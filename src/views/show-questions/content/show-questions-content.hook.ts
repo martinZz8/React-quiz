@@ -128,7 +128,8 @@ const useShowQuestionsContent = () => {
     });
   };
 
-  return {filteredQuestions,
+  return {
+    filteredQuestions,
     searchBarInputs,
     areQuestionsLoading,
     handleSearchBarInputs,
