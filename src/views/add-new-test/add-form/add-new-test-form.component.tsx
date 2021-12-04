@@ -14,6 +14,7 @@ import TemplateContentCard from "../../../templates/content-card/content-card.te
 import InputField from "../../../components/ui/input-field/input-field.component";
 import Button from "../../../components/ui/button/button.component";
 import LoadingModal from "../../../modals/loading-modal/loading-modal.component";
+import ListQuestionsOrStudents from "./list-questions-or-students/list-questions-or-students.component";
 
 // interfaces
 interface IAddNewTestForm extends RouteComponentProps<any> {
@@ -137,7 +138,25 @@ const AddNewTestForm: React.FC<IAddNewTestForm> = ({isTestEdit, match}) => {
                   </div>
                 </div>
                 {/*List questions*/}
+                <div className={styles.row} style={{marginTop: "10px"}}>
+                  <div className={`${styles.item} ${styles.fullWidth}`}>
+                    <ListQuestionsOrStudents
+                      areQuestions={true}
+                      toggleChosenIds={(id, isAdd) => toggleQuestionOrStudent(true, id ,isAdd)}
+                      chosenIds={newTestInput.questionsIds}
+                    />
+                  </div>
+                </div>
                 {/*List students*/}
+                <div className={styles.row} style={{marginTop: "10px"}}>
+                  <div className={`${styles.item} ${styles.fullWidth}`}>
+                    <ListQuestionsOrStudents
+                      areQuestions={false}
+                      toggleChosenIds={(id, isAdd) => toggleQuestionOrStudent(false, id ,isAdd)}
+                      chosenIds={newTestInput.usersIds}
+                    />
+                  </div>
+                </div>
                 {/*Error box*/}
                 <div className={styles.row}>
                   <div className={`${styles.item} ${styles.fullWidth} ${styles.messageBoxWrap}`}>

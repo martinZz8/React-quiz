@@ -1,0 +1,126 @@
+@import "src/styles/variables";
+
+.oneListItem {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+
+  .itemWrap {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .titleWrap {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      cursor: pointer;
+      padding-bottom: 10px;
+
+      p, .doubleTitle {
+        width: 95%;
+      }
+
+      p, .doubleTitle p {
+        height: auto;
+        font-size: 15px;
+        font-weight: 600;
+        font-style: normal;
+        color: $colorBlack;
+        overflow-wrap: break-word;
+        padding-right: 3px;
+
+        &.smallText {
+          font-size: 13px;
+        }
+      }
+
+      .arrowWrap {
+        width: 5%;
+        height: auto;
+
+        svg {
+          width: 12px;
+          height: 12px;
+          transform: rotate(0deg);
+          transition: transform ease-in-out 0.3s;
+
+          &.opened {
+            transform: rotate(-180deg);
+          }
+        }
+      }
+    }
+
+    .extraContentWrap {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 8px 6px;
+      margin-bottom: 10px;
+      background-color: $colorLightGray;
+      border-radius: 12px;
+
+      .oneItemWrap {
+        width: 100%;
+        height: auto;
+        margin-bottom: 5px;
+
+        &.column {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+
+          p {
+            margin-bottom: 2px;
+
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+
+            span {
+              &.green {
+                color: $colorGreen;
+              }
+
+              &.red {
+                color: $colorRed;
+              }
+            }
+          }
+        }
+
+        p {
+          width: 100%;
+          height: auto;
+          font-size: 14px;
+          font-weight: 600;
+          font-style: normal;
+          color: $colorBlack;
+          overflow-wrap: break-word;
+        }
+      }
+    }
+
+    .buttonsWrap {
+      width: 100%;
+      height: 36px;
+      padding-top: 10px;
+      border-top: 1px solid $colorGray;
+
+      .buttonWrap {
+        width: 80px;
+        height: 100%;
+      }
+    }
+  }
+}

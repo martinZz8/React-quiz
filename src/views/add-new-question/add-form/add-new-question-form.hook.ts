@@ -74,6 +74,18 @@ const useAddNewQuestionForm = (questionId: string, isQuestionEdit?: boolean) => 
       validateType();
       validateAnswers();
 
+      // setNewQuestionInputErrors(prev => ({
+      //   ...prev,
+      //   APIError: ""
+      // }));
+      //
+      // setIsSuccessCreation(false);
+    }
+  },[isLiveValidation, newQuestionInput]);
+
+  // hide APIError and success messages, when user changes any input
+  useEffect(() => {
+    if (isLiveValidation) {
       setNewQuestionInputErrors(prev => ({
         ...prev,
         APIError: ""
@@ -81,7 +93,7 @@ const useAddNewQuestionForm = (questionId: string, isQuestionEdit?: boolean) => 
 
       setIsSuccessCreation(false);
     }
-  },[isLiveValidation, newQuestionInput]);
+  },[newQuestionInput]);
 
   const findHighestAnswerId = (): number => {
     let highestId = 1;

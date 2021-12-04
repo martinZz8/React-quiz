@@ -84,7 +84,7 @@
 
         svg {
           transform: rotate(0deg);
-          transition: transform ease-in-out 0.2s;
+          transition: transform ease-in-out 0.3s;
 
           &.opened {
             transform: rotate(-180deg);

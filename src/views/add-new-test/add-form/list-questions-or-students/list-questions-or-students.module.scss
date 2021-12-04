@@ -1,5 +1,58 @@
 @import "src/styles/variables";
 
 .listQuestionsOrStudents {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 
+  .header {
+    width: 100%;
+    height: auto;
+
+    p {
+      font-size: 20px;
+      font-weight: 700;
+      font-style: normal;
+      color: $colorBlack;
+      text-align: left;
+    }
+  }
+
+  .content {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .leftContainer, .rightContainer {
+      width: 100%;
+      height: 380px;
+    }
+
+    .rightContainer {
+      margin-top: 20px;
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .listQuestionsOrStudents {
+    .content {
+      flex-direction: row;
+      justify-content: space-between;
+
+      .leftContainer, .rightContainer {
+        width: 47%;
+      }
+
+      .rightContainer {
+        margin-top: 0;
+      }
+    }
+  }
 }
