@@ -14,10 +14,11 @@ interface IListQuestionsOrStudents {
   areQuestions: boolean;
   toggleChosenIds: (id: number, isAdd: boolean) => void;
   chosenIds: number[];
+  isTestForEditLoaded: boolean;
 }
 
-const ListQuestionsOrStudents: React.FC<IListQuestionsOrStudents> = ({areQuestions, toggleChosenIds, chosenIds}) => {
-  const {questions, students, isLoading, availableIds, toggleAvailableIds} = useListQuestionsOrStudents(areQuestions, toggleChosenIds);
+const ListQuestionsOrStudents: React.FC<IListQuestionsOrStudents> = ({areQuestions, toggleChosenIds, chosenIds, isTestForEditLoaded}) => {
+  const {questions, students, isLoading, availableIds, toggleAvailableIds} = useListQuestionsOrStudents(areQuestions, toggleChosenIds, isTestForEditLoaded, chosenIds);
 
   return (
     <div className={styles.listQuestionsOrStudents}>

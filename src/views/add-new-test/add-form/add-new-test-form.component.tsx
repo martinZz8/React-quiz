@@ -30,7 +30,8 @@ const AddNewTestForm: React.FC<IAddNewTestForm> = ({isTestEdit, match}) => {
     submitNewTestForm,
     isSuccessCreation,
     isTestForEditLoading,
-    isTestForEditForbidden
+    isTestForEditForbidden,
+    isTestForEditLoaded
   } = useAddNewTestForm(match.params.id, isTestEdit);
 
   return (
@@ -144,6 +145,7 @@ const AddNewTestForm: React.FC<IAddNewTestForm> = ({isTestEdit, match}) => {
                       areQuestions={true}
                       toggleChosenIds={(id, isAdd) => toggleQuestionOrStudent(true, id ,isAdd)}
                       chosenIds={newTestInput.questionsIds}
+                      isTestForEditLoaded={isTestForEditLoaded}
                     />
                   </div>
                 </div>
@@ -154,6 +156,7 @@ const AddNewTestForm: React.FC<IAddNewTestForm> = ({isTestEdit, match}) => {
                       areQuestions={false}
                       toggleChosenIds={(id, isAdd) => toggleQuestionOrStudent(false, id ,isAdd)}
                       chosenIds={newTestInput.usersIds}
+                      isTestForEditLoaded={isTestForEditLoaded}
                     />
                   </div>
                 </div>

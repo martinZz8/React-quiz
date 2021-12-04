@@ -25,6 +25,7 @@ const useAddNewTestForm = (testId: string, isTestEdit?: boolean) => {
 
   // Edit test states
   const [isTestForEditLoading, setIsTestForEditLoading] = useState<boolean>(false);
+  const [isTestForEditLoaded, setIsTestForEditLoaded] = useState<boolean>(false);
   const [isTestForEditForbidden, setIsTestForEditForbidden] = useState<boolean>(false);
 
   const {accessToken, user: {username}} = useTypedSelector(state => state.login.loginData);
@@ -60,9 +61,11 @@ const useAddNewTestForm = (testId: string, isTestEdit?: boolean) => {
                 startDate: convertDatetimeFromBackendApi(data.startDate),
                 endDate: convertDatetimeFromBackendApi(data.endDate),
               });
+
+              setIsTestForEditLoaded(true);
             }
             else {
-              console.log("usernames doesn't match")
+              //usernames doesn't match
               setIsTestForEditForbidden(true);
             }
             setIsTestForEditLoading(false);
@@ -76,6 +79,9 @@ const useAddNewTestForm = (testId: string, isTestEdit?: boolean) => {
           setIsTestForEditForbidden(true);
           setIsTestForEditLoading(false);
         });
+    }
+    else {
+      setIsTestForEditLoaded(true);
     }
   },[]);
 
@@ -362,29 +368,25 @@ const useAddNewTestForm = (testId: string, isTestEdit?: boolean) => {
 
     // Perform submit if it's possible
     if (canSubmit) {
-      let requestToBeSend = {
-        name: newTestInput.name,
-        numberOfQuestions: newTestInput.numberOfQuestions,
-        time: getMilliseconds({
-          hours: parseInt(newTestInput.timeHours),
-          minutes: parseInt(newTestInput.timeMinutes),
-          seconds: parseInt(newTestInput.timeSeconds)
-        }),
-        questionsId: newTestInput.questionsIds,
-        usersId: newTestInput.usersIds,
-        startDate: convertBackendApiFromDatetime(newTestInput.startDate),
-        endDate: convertBackendApiFromDatetime(newTestInput.endDate)
-      };
-
-      console.log("Request to be send:", requestToBeSend);
-
       fetch(`${process.env.REACT_APP_BACKED_URL}/api/tests${isTestEdit ? `/${testId}` : ""}`, {
         method: !isTestEdit ? 'POST': 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`,
         },
-        body: JSON.stringify(requestToBeSend)
+        body: JSON.stringify({
+          name: newTestInput.name,
+          numberOfQuestions: newTestInput.numberOfQuestions,
+          time: getMilliseconds({
+            hours: parseInt(newTestInput.timeHours),
+            minutes: parseInt(newTestInput.timeMinutes),
+            seconds: parseInt(newTestInput.timeSeconds)
+          }),
+          questionsId: newTestInput.questionsIds,
+          usersId: newTestInput.usersIds,
+          startDate: convertBackendApiFromDatetime(newTestInput.startDate),
+          endDate: convertBackendApiFromDatetime(newTestInput.endDate)
+        })
       })
       .then(async response => {
         if (response.ok) {
@@ -415,7 +417,8 @@ const useAddNewTestForm = (testId: string, isTestEdit?: boolean) => {
     toggleQuestionOrStudent,
     submitNewTestForm,
     isTestForEditLoading,
-    isTestForEditForbidden
+    isTestForEditForbidden,
+    isTestForEditLoaded
   };
 };
 
