@@ -4,7 +4,7 @@ import React, {useState, useEffect} from "react";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 // data
-import {initialISearchBarInputs} from "./show-questions-content.data";
+import {initialSearchBarInputs} from "./show-questions-content.data";
 
 // interfaces
 import {ISearchBarInputs, IQuestion} from "./show-qeustions-content.types";
@@ -12,7 +12,7 @@ import {ISearchBarInputs, IQuestion} from "./show-qeustions-content.types";
 const useShowQuestionsContent = () => {
   const [questions, setQuestions] = useState<IQuestion[]>([]);
   const [filteredQuestions, setFilteredQuestions] = useState<IQuestion[]>([]);
-  const [searchBarInputs, setSearchBarInputs] = useState<ISearchBarInputs>(initialISearchBarInputs);
+  const [searchBarInputs, setSearchBarInputs] = useState<ISearchBarInputs>(initialSearchBarInputs);
   const [areQuestionsLoading, setAreQuestionsLoading] = useState<boolean>(false);
 
   // Delete modal states

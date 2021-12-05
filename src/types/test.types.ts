@@ -1,0 +1,1 @@
+export type ITestStatuses = "ENDED" | "ACTIVE" | "ACTIVE_IN_FUTURE" | "";

@@ -14,6 +14,7 @@ const UnauthenticatedApp: React.FC<IUnauthenticatedApp> = ({appVersion}) => {
 
   return (
     <Switch>
+      {/*Register*/}
       <Route
         exact
         path="/rejestracja"
@@ -21,6 +22,7 @@ const UnauthenticatedApp: React.FC<IUnauthenticatedApp> = ({appVersion}) => {
           <ViewRegister appVersion={appVersion} />
         }
       />
+      {/*Login view - main view*/}
       <Route
         exact
         path="/"
@@ -28,6 +30,7 @@ const UnauthenticatedApp: React.FC<IUnauthenticatedApp> = ({appVersion}) => {
           <ViewLogin appVersion={appVersion} />
         }
       />
+      {/*Other routes*/}
       <Route
         path="*"
         component={() =>

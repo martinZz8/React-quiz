@@ -36,6 +36,7 @@ const useListQuestionsOrStudents = (areQuestions: boolean, toggleChosenIds: (id:
             setQuestions(data.content.map((question: any) => ({
               id: question.id,
               question: question.text,
+              points: question.points,
               type: question.type,
               answers: question.answers.map((answer: any) => ({
                 id: answer.id,

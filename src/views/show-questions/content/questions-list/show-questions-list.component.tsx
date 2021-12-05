@@ -69,12 +69,16 @@ const ShowQuestionsList: React.FC<IShowQuestionsList> = ({
                         <b>Maksymalne punkty: </b>
                         {question.points}
                       </p>
+                    </div>
+                    <div className={styles.row}>
                       <p>
                         <b>Należy do testów: </b>
                         {
                           question.testsName.length > 0 ?
-                            question.testsName.map(testName => testName)
-                          :
+                            question.testsName.map((testName, index) =>
+                              `${testName}${index !== question.testsName.length-1 ? ", " : ""}`
+                            )
+                            :
                             "-"
                         }
                       </p>

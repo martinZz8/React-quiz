@@ -1,6 +1,6 @@
 @import "src/styles/variables";
 
-.showQuestionsList {
+.showTestsList {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
@@ -11,7 +11,7 @@
   align-items: flex-start;
   z-index: 99;
 
-  &.noQuestions {
+  &.noTests {
     justify-content: center;
     align-items: center;
   }
@@ -25,7 +25,7 @@
     text-align: center;
   }
 
-  .question {
+  .test {
     width: 100%;
     height: auto;
     padding: 10px 10px 10px 20px;
@@ -39,7 +39,7 @@
       border-bottom: none;
     }
 
-    .questionContainer {
+    .testContainer {
       width: 100%;
       height: auto;
       display: flex;
@@ -47,7 +47,7 @@
       align-items: center;
       cursor: pointer;
 
-      .questionText, .questionType {
+      .testName, .testStatus {
         height: 100%;
         display: flex;
         align-items: center;
@@ -62,16 +62,35 @@
         }
       }
 
-      .questionText {
+      .testName {
         width: 60%;
         border-right: 1px solid $colorDarkPurple;
         padding-right: 5px;
       }
 
-      .questionType {
+      .testStatus {
         width: 32%;
         justify-content: flex-start;
         padding-left: 5px;
+
+        .statusDot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          margin-right: 5px;
+
+          &.green {
+            background-color: $colorGreen;
+          }
+
+          &.red {
+            background-color: $colorRed;
+          }
+
+          &.blue {
+            background-color: $colorBlue;
+          }
+        }
       }
 
       .utils {
@@ -93,7 +112,7 @@
       }
     }
 
-    .questionDescription {
+    .testDescription {
       width: 100%;
       height: auto;
       padding: 10px 20px;
@@ -112,6 +131,23 @@
         justify-content: flex-start;
         align-items: center;
         grid-column-gap: 10px;
+        margin-top: 5px;
+
+        &.noMarginTop {
+          margin-top: 0;
+        }
+
+        &.column {
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+
+          p {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+          }
+        }
 
         p {
           font-size: 15px;
@@ -125,6 +161,10 @@
 
           &.red {
             color: $colorRed;
+          }
+
+          &.smallText {
+            font-size: 13px;
           }
         }
 
@@ -143,14 +183,14 @@
 }
 
 @media (min-width: 800px) {
-  .showQuestionsList {
-    .question {
-      .questionContainer{
-        .questionText {
+  .showTestsList {
+    .test {
+      .testContainer{
+        .testName {
           width: 65%;
         }
 
-        .questionType {
+        .testStatus {
           width: 30%;
         }
 

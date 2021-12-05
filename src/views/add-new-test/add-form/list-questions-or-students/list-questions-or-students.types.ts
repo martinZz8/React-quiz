@@ -10,6 +10,7 @@ interface IAnswer {
 export interface IQuestion {
   id: number;
   question: string;
+  points: number;
   type: IQuestionTypes;
   answers: IAnswer[];
 }

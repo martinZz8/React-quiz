@@ -19,7 +19,7 @@ export const selectQuestionTypeOptions: IQuestionTypeOption[] = [
   }
 ];
 
-export const initialISearchBarInputs: ISearchBarInputs = {
+export const initialSearchBarInputs: ISearchBarInputs = {
   question: "",
   type: ""
 };

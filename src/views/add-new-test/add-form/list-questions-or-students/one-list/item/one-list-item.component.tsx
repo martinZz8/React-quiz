@@ -58,6 +58,9 @@ const OneListItem: React.FC<IOneListItem> = ({
                     <p><b>Typ: </b>{questionToShow?.type ? translateQuestionType(questionToShow?.type) : "-"}</p>
                   </div>
                   <div className={styles.oneItemWrap}>
+                    <p><b>Punkty: </b>{questionToShow?.points}</p>
+                  </div>
+                  <div className={styles.oneItemWrap}>
                     <p><b>Odpowiedzi:</b></p>
                   </div>
                   <div className={`${styles.oneItemWrap} ${styles.column}`}>
