@@ -1,0 +1,68 @@
+@import "src/styles/variables";
+
+.mainMenuHeader {
+  width: 100%;
+  height: 70px;
+  background-color: $colorLightPurple;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .firstHeader, .secondHeader {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $colorLighterPurple;
+    }
+
+    p {
+      color: $colorDarkPurple;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      position: relative;
+
+      .underline {
+        width: 100%;
+        height: 3px;
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        background-color: $colorDarkPurple;
+        border-radius: 50px;
+      }
+    }
+
+    &.active {
+      p {
+        color: $colorWhite;
+
+        .underline {
+          background-color: $colorWhite;
+        }
+      }
+    }
+  }
+
+  .divider {
+    width: 5px;
+    height: 70%;
+    background-color: $colorSemiLightPurple;
+    border-radius: 50px;
+  }
+}
+
+@media (min-width: 520px) {
+  .mainMenuHeader {
+    .firstHeader, .secondHeader {
+      p {
+        font-size: 25px;
+      }
+    }
+  }
+}

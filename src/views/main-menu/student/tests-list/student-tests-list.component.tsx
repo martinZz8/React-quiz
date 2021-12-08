@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 // styles
 import styles from "./student-tests-list.module.scss";
@@ -17,6 +17,7 @@ import TemplateContentCard from "../../../../templates/content-card/content-card
 
 // components
 import LoadingModal from "../../../../modals/loading-modal/loading-modal.component";
+import MainMenuHeader from "../../../../components/main-menu-header/main-menu-header.component";
 import SingleTest from "./single-test/single-test.component";
 
 const StudentTestsList: React.FC = () => {
@@ -28,27 +29,13 @@ const StudentTestsList: React.FC = () => {
       title={<p>Cześć <b>{firstName}!</b></p>}
     >
       <div className={styles.testsView}>
-        <div className={styles.testsMenu}>
-          <div
-            className={`${styles.activeTestsHeader} ${isActiveTestsView ? styles.active : ""}`}
-            onClick={() => setIsActiveTestsView(true)}
-          >
-            <p className="noSelect">
-              Aktywne testy
-              <span className={styles.underline}/>
-            </p>
-          </div>
-          <div className={styles.divider}/>
-          <div
-            className={`${styles.completedTestsHeader} ${!isActiveTestsView ? styles.active : ""}`}
-            onClick={() => setIsActiveTestsView(false)}
-          >
-            <p className="noSelect">
-              Zakończone testy
-              <span className={styles.underline}/>
-            </p>
-          </div>
-        </div>
+        <MainMenuHeader
+          firstTitle="Aktywne testy"
+          secondTitle="Zakończone testy"
+          onFirstTitleClick={() => setIsActiveTestsView(true)}
+          onSecondTitleClick={() => setIsActiveTestsView(false)}
+          isFirstHeaderActive={isActiveTestsView}
+        />
         <div className={`customScrollBar ${styles.testsList} ${testsToShow.length === 0 ? styles.noTests : ""}`}>
           {
             !areTestsLoading ?

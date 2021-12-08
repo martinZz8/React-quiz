@@ -1,0 +1,54 @@
+@import "src/styles/variables";
+
+.singleCard {
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $colorLightPurple;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 23px 10px;
+
+  &.smallWidth {
+    width: 228px;
+  }
+
+  &:hover {
+    background-color: $colorLighterPurple;
+
+    .buttonWrap {
+      button {
+        background-color: $colorLightPurple!important;
+      }
+    }
+  }
+
+  p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    color: $colorWhite;
+    text-align: center;
+
+    &.header {
+      font-weight: bold;
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .imageWrap {
+    width: 130px;
+    height: 130px;
+    margin-top: 45px;
+  }
+
+  .buttonWrap {
+    width: 187px;
+    height: 33px;
+    margin-top: 64px;
+  }
+}

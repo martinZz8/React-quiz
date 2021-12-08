@@ -21,66 +21,6 @@ const useStudentTestsList = () => {
     setTestsToShow([]);
     setAreTestsLoading(true);
 
-    //**OLD TEST DATA**
-    // let tempData: ITestsToShow[] = [
-    //   {
-    //     id: "1",
-    //     name: "test1",
-    //     author: "Maciej Harbuz",
-    //     startDate: "07.13.2021 13:00",
-    //     endDate: "07.13.2021 15:00",
-    //     time: "00h 30min"
-    //   },
-    //   {
-    //     id: "2",
-    //     name: "test2",
-    //     author: "Maciej Harbuz",
-    //     startDate: "07.13.2021 13:00",
-    //     endDate: "07.13.2021 15:00",
-    //     time: "00h 30min"
-    //   },
-    //   {
-    //     id: "3",
-    //     name: "test3",
-    //     author: "Maciej Harbuz",
-    //     startDate: "07.13.2021 13:00",
-    //     endDate: "07.13.2021 15:00",
-    //     time: "00h 30min"
-    //   },
-    //   {
-    //     id: "4",
-    //     name: "test4",
-    //     author: "Maciej Harbuz",
-    //     startDate: "07.13.2021 13:00",
-    //     endDate: "07.13.2021 15:00",
-    //     time: "00h 30min"
-    //   },
-    //   {
-    //     id: "5",
-    //     name: "test5",
-    //     author: "Maciej Harbuz",
-    //     startDate: "07.13.2021 13:00",
-    //     endDate: "07.13.2021 15:00",
-    //     time: "00h 30min"
-    //   },
-    //   {
-    //     id: "6",
-    //     name: "test6",
-    //     author: "Maciej Harbuz",
-    //     startDate: "07.13.2021 13:00",
-    //     endDate: "07.13.2021 15:00",
-    //     time: "00h 30min"
-    //   },
-    //   {
-    //     id: "7",
-    //     name: "test7",
-    //     author: "Maciej Harbuz",
-    //     startDate: "07.13.2021 13:00",
-    //     endDate: "07.13.2021 15:00",
-    //     time: "00h 30min"
-    //   }
-    // ];
-
     fetch(`${process.env.REACT_APP_BACKED_URL}/api/tests/${isActiveTestsView ? "active" : "nonactive"}`, {
       method: 'GET',
       headers: {

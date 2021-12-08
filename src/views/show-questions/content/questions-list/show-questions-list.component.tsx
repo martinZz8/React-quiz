@@ -84,7 +84,7 @@ const ShowQuestionsList: React.FC<IShowQuestionsList> = ({
                       </p>
                     </div>
                     <div className={styles.row} style={{marginTop: "10px"}}>
-                      <p><b>Pytania:</b></p>
+                      <p><b>Opdowiedzi:</b></p>
                     </div>
                     {
                       question.type !== "DESCRIPTIVE" ?
