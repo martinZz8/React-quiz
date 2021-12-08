@@ -6,16 +6,15 @@
   position: relative;
   padding-left: 37px;
   cursor: pointer;
-
-  &.disabledContainer {
-    cursor: not-allowed;
-  }
-
   color: $colorBlack;
   font-weight: 400;
   font-style: normal;
   font-size: 18px;
-  text-align: center;
+  text-align: left;
+
+  &.disabledContainer {
+    cursor: not-allowed;
+  }
 }
 
 /* Hide the browser's default checkbox */

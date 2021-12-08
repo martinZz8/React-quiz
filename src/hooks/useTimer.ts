@@ -1,8 +1,4 @@
 import {useState, useEffect} from "react";
-import getMilliseconds from "../functions/get-milliseconds";
-
-// interfaces
-import {ITime} from "../types/time.types";
 
 const useTimer = () => {
   const [timeLeft, setTimeLeft] = useState<number>(-1);
@@ -21,8 +17,8 @@ const useTimer = () => {
   },[timeLeft]);
 
   // -- Start the timer method --
-  const startTheTimer = (time: ITime) => {
-    setTimeLeft(getMilliseconds(time));
+  const startTheTimer = (timeInMilliseconds: number) => {
+    setTimeLeft(timeInMilliseconds);
   };
 
   // -- End the timer --

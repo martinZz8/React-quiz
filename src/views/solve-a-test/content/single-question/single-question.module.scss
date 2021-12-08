@@ -1,0 +1,38 @@
+@import "src/styles/variables";
+
+.singleQuestion {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  p.header {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    color: $colorBlack;
+    margin-bottom: 15px;
+  }
+
+  .answers {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 30px;
+
+    .answer {
+      width: 100%;
+      height: auto;
+      margin-bottom: 13px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

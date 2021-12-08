@@ -7,16 +7,17 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 19px 25px;
+  //padding: 19px 25px;
   position: relative;
 
   .header {
-    height: auto;
     width: 100%;
+    height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 6px;
+    padding: 20px 25px 0 25px;
+    border-bottom: 1px solid $colorDarkGray;
 
     .title {
       p {
@@ -44,35 +45,93 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 6px 25px 25px 25px;
 
     &.questions {
       justify-content: flex-start;
       align-items: flex-start;
       overflow-y: scroll;
 
-      .buttonWrap {
-        width: 150px;
-        height: 50px;
+      .questionWrap {
+        width: 100%;
+        height: auto;
+        margin-bottom: 16px;
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
       }
+
+      .buttonWrapContainer {
+        width: 100%;
+        min-height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+
+        .buttonWrap {
+          width: 263px;
+          height: 100%;
+        }
+      }
+
     }
 
     &.endOfTest, &.startTest {
       .message {
         margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
 
-        p {
+        p, a {
           font-style: normal;
           font-weight: 600;
           font-size: 26px;
-          color: $colorBlack;
           text-align: center;
+        }
+
+        p {
+          color: $colorBlack;
+          margin-bottom: 3px;
+
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+
+        a {
+          margin-top: 6px;
+          color: $colorDarkPurple;
+
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
 
       .buttonWrap {
-        width: 150px;
+        width: 180px;
         height: 50px;
       }
+    }
+  }
+
+  .noAccess {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: 20px;
+      font-weight: 700;
+      font-style: normal;
+      color: $colorBlack;
+      text-align: center;
     }
   }
 }

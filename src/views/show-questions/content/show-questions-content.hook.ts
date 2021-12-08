@@ -30,7 +30,7 @@ const useShowQuestionsContent = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`,
+        'Authorization': `Bearer ${accessToken}`
       }
     })
     .then(async response => {
@@ -99,7 +99,7 @@ const useShowQuestionsContent = () => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`,
+        'Authorization': `Bearer ${accessToken}`
       }
     })
     .then(async response => {

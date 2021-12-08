@@ -26,7 +26,7 @@ const useListQuestionsOrStudents = (areQuestions: boolean, toggleChosenIds: (id:
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
+            'Authorization': `Bearer ${accessToken}`
           }
         })
         .then(async response => {
@@ -69,7 +69,7 @@ const useListQuestionsOrStudents = (areQuestions: boolean, toggleChosenIds: (id:
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
+            'Authorization': `Bearer ${accessToken}`
           }
         })
         .then(async response => {

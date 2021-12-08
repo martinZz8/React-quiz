@@ -24,10 +24,6 @@ const useAddNewQuestionForm = (questionId: string, isQuestionEdit?: boolean) => 
 
   const accessToken = useTypedSelector(state => state.login.loginData.accessToken);
 
-  // useEffect(() => {
-  //   console.log("newQuestionInput", newQuestionInput);
-  // },[newQuestionInput]);
-
   // Load question if it's question edit view
   useEffect(() => {
     if (isQuestionEdit) {
@@ -36,7 +32,7 @@ const useAddNewQuestionForm = (questionId: string, isQuestionEdit?: boolean) => 
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
+          'Authorization': `Bearer ${accessToken}`
         }
       })
         .then(async response => {
@@ -369,7 +365,7 @@ const useAddNewQuestionForm = (questionId: string, isQuestionEdit?: boolean) => 
         method: !isQuestionEdit ? 'POST' : 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
+          'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify({
           points: parseInt(newQuestionInput.points),

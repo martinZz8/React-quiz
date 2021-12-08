@@ -42,7 +42,7 @@ const useAddNewTestForm = (testId: string, isTestEdit?: boolean) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
+          'Authorization': `Bearer ${accessToken}`
         }
       })
         .then(async response => {
@@ -372,7 +372,7 @@ const useAddNewTestForm = (testId: string, isTestEdit?: boolean) => {
         method: !isTestEdit ? 'POST': 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
+          'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify({
           name: newTestInput.name,

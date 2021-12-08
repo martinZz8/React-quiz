@@ -25,7 +25,7 @@ const useStudentTestsList = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`,
+        'Authorization': `Bearer ${accessToken}`
       }
     })
     .then(async response => {
