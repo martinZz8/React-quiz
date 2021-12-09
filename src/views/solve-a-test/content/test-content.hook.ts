@@ -16,7 +16,6 @@ import {initialTestData} from "./test-content.data";
 
 // interfaces
 import {ITestQuestion, ITestData, IStudentsQuestionAnswer} from "./test-content.types";
-import {queries} from "@testing-library/react";
 
 const useTestContent = (testId: string) => {
   const [testData, setTestData] = useState<ITestData>(initialTestData);
