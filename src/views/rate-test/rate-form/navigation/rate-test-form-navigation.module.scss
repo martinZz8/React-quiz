@@ -1,0 +1,69 @@
+@import "src/styles/variables";
+
+.navigation {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4px;
+  padding-bottom: 10px;
+  border-top: 1px solid $colorDarkGray;
+
+  .errorMessage {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1px;
+
+    p {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      color: $colorRed;
+    }
+  }
+
+  .navigationContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .navButtonWrap {
+      width: 100px;
+      height: 100%;
+    }
+
+    .pageWrap {
+      width: 105px;
+      height: 100%;
+      margin: 0 16px;
+      background-color: $colorDarkWhite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+
+      p {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 26px;
+        color: $colorBlack;
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .navigation {
+    .navigationContainer {
+      .navButtonWrap {
+        width: 200px;
+      }
+    }
+  }
+}

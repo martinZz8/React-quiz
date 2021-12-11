@@ -76,7 +76,7 @@ const ShowTestsList: React.FC<IShowTestsList> = ({
             </div>
           )
         :
-          <p>Nie ma żadnych testów do ocenienia</p>
+          <p>Nie ma żadnych testów do oceny</p>
       }
     </div>
   );

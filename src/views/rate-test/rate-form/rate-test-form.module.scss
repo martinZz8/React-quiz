@@ -1,0 +1,58 @@
+@import "src/styles/variables";
+
+.rateTestForm {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+
+  .headerWrap {
+    width: 100%;
+    height: 57px;
+  }
+
+  .questionContainer {
+    width: 100%;
+    height: calc(100% - 131px);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 8px 25px;
+
+    .answerWrap {
+      width: 100%;
+      height: auto;
+      margin-bottom: 5px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .navigationWrap {
+    width: 100%;
+    height: 74px;
+  }
+
+  .noAccess {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: 20px;
+      font-weight: 700;
+      font-style: normal;
+      color: $colorBlack;
+      text-align: center;
+    }
+  }
+}

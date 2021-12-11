@@ -1,0 +1,97 @@
+@import "src/styles/variables";
+
+.answerContainer {
+  width: 100%;
+  height: auto;
+
+  .questionText {
+    width: 100%;
+    height: auto;
+    margin-bottom: 8px;
+
+    p {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 26px;
+      color: $colorBlack;
+    }
+  }
+
+  .answer {
+    width: 100%;
+    height: auto;
+    padding-left: 30px;
+    margin-bottom: 15px;
+
+    &.open {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      .studentsAnswer, .correctAnswer {
+        width: 50%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        p.title {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          color: $colorBlack;
+          margin-bottom: 5px;
+        }
+
+        .answerPart {
+          width: 100%;
+          height: auto;
+          margin-bottom: 3px;
+
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .correctAnswer {
+        border-left: 1px solid $colorDarkGray;
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .rateAnswer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .ratingContainer {
+      width: auto;
+      height: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 25px;
+        color: $colorBlack;
+        margin-right: 7px;
+
+        &.maxPoints {
+          margin-left: 5px;
+        }
+      }
+
+      .inputWrap {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+}

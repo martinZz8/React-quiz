@@ -78,7 +78,7 @@ const ShowQuestionsList: React.FC<IShowQuestionsList> = ({
                             question.testsName.map((testName, index) =>
                               `${testName}${index !== question.testsName.length-1 ? ", " : ""}`
                             )
-                            :
+                          :
                             "-"
                         }
                       </p>
