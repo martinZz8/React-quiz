@@ -82,6 +82,15 @@ const ClassicMenu: React.FC<IClassicMenu> = ({isStudent, isTeacher}) => {
                     Utwórz test
                   </NavLink>
                 </div>
+                <div className={styles.item}>
+                  <NavLink
+                    exact
+                    to="/testy/ocen"
+                    activeClassName={styles.activeLink}
+                  >
+                    Testy do oceny
+                  </NavLink>
+                </div>
               </div>
             </div>
           </>

@@ -16,6 +16,7 @@ import ViewAddNewQuestion from "../../add-new-question/add-new-question.componen
 import ViewShowQuestions from "../../show-questions/show-questions.component";
 import ViewAddNewTest from "../../add-new-test/add-new-test.component";
 import ViewShowTests from "../../show-tests/show-tests.component";
+import ViewShowTestsToRate from "../../show-tests-to-rate/show-tests-to-rate.component";
 
 // interfaces
 interface IAuthenticatedApp {
@@ -81,6 +82,17 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
           isUserType("student", userRoles) ?
             <ViewSolveATest appVersion={appVersion} />
           ://TEACHER
+            <Redirect to="/" />
+        )
+        }
+      />
+      <Route
+        exact
+        path="/testy/ocen"
+        component={() => (
+          isUserType("teacher", userRoles) ?
+            <ViewShowTestsToRate appVersion={appVersion} />
+          ://STUDENT
             <Redirect to="/" />
         )
         }

@@ -148,7 +148,7 @@ const useShowTestsContent = () => {
           ...test,
           status: getTestStatusFromBackendApiDate(test.startDate, test.endDate)
         })));
-      }, 2000);
+      }, 60000);
 
       return () => clearInterval(timer);
     }
@@ -178,7 +178,7 @@ const useShowTestsContent = () => {
     }
   },[tests, searchBarInputs]);
 
-  // handle search bar inputs function
+  // Handle search bar inputs function
   const handleSearchBarInputs = (name: string, value: string) => {
     setSearchBarInputs(prev => ({
       ...prev,

@@ -100,6 +100,15 @@ const MobileMenu: React.FC<IMobileMenu> = ({onOutClick, isStudent, isTeacher}) =
                         Utwórz test
                       </NavLink>
                     </div>
+                    <div className={styles.menuSubItem}>
+                      <NavLink
+                        exact
+                        to="/testy/ocen"
+                        activeClassName={styles.activeLink}
+                      >
+                        Testy do oceny
+                      </NavLink>
+                    </div>
                   </>
                   :
                   null
