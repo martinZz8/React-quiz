@@ -1,4 +1,5 @@
 import React from "react";
+import {RouteComponentProps, withRouter} from "react-router";
 
 // styles
 import styles from "./rate-test-form.module.scss";
@@ -15,7 +16,12 @@ import RateTestFormNavigation from "./navigation/rate-test-form-navigation.compo
 import RateTestFormHeader from "./header/rate-test-form-header.component";
 import RateTestFormAnswer from "./answer/rate-test-form-answer.component";
 
-const RateTestForm: React.FC = () => {
+// interfaces
+interface IRateTestForm extends RouteComponentProps<any> {
+
+}
+
+const RateTestForm: React.FC<IRateTestForm> = ({match}) => {
   const {
     questions,
     studentsAnswers,
@@ -28,7 +34,7 @@ const RateTestForm: React.FC = () => {
     handleStudentAnswerRate,
     submitAnswersRating,
     getActualStudent
-  } = useRateTestForm();
+  } = useRateTestForm(match.params.id);
 
   return (
     <TemplateContentCard
@@ -93,4 +99,4 @@ const RateTestForm: React.FC = () => {
   );
 };
 
-export default RateTestForm;
+export default withRouter(RateTestForm);

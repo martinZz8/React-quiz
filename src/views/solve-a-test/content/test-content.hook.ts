@@ -190,11 +190,16 @@ const useTestContent = (testId: string) => {
       }
       else {
         if (typeof(value) === "string") {
+          let valToSet = value;
+          if (valToSet.length > 300) {
+            valToSet = valToSet.substring(0, 300);
+          }
+
           setStudentsQuestionsAnswers([
             ...studentsQuestionsAnswers.slice(0, foundAnswerIndex),
             {
               ...studentsQuestionsAnswers[foundAnswerIndex],
-              openAnswer: value
+              openAnswer: valToSet
             },
             ...studentsQuestionsAnswers.slice(foundAnswerIndex+1, studentsQuestionsAnswers.length)
           ]);
@@ -228,40 +233,38 @@ const useTestContent = (testId: string) => {
     setIsSubmitModalOpened(false);
     setIsTestSubmitting(true);
 
-    //TO DO - submit test (change only URL)
-    // fetch(`${process.env.REACT_APP_BACKED_URL}/api/tests/${testId}`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${accessToken}`
-    //   },
-    //   body: JSON.stringify({
-    //     testId: testData.id,
-    //     answers: studentsQuestionsAnswers.map(answer => ({
-    //       questionId: answer.questionId,
-    //       text: answer.questionType === "DESCRIPTIVE" ? answer.openAnswer : null,
-    //       answerId: answer.questionType === "SINGLE" ? answer.selectedAnswerId : null,
-    //       answerIds: answer.questionType === "MULTI" ? answer.selectedAnswerIds : null
-    //     }))
-    //   })
-    // })
-    // .then(response => {
-    //   if (response.ok) {
-    //     setIsTestSubmitting(false);
-    //   }
-    //   else {
-    //     console.log("error during test submitting");
-    //     setIsErrorTestSubmit(true);
-    //     setIsTestSubmitting(false);
-    //   }
-    // })
-    // .catch(error => {
-    //   console.log("error during test submitting");
-    //   setIsErrorTestSubmit(true);
-    //   setIsTestSubmitting(false);
-    // });
-
-    setIsTestSubmitting(false); // TO DELETE
+    fetch(`${process.env.REACT_APP_BACKED_URL}/api/results`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({
+        testId: testData.id,
+        answers: studentsQuestionsAnswers.map(answer => ({
+          questionId: answer.questionId,
+          text: answer.questionType === "DESCRIPTIVE" ? (answer.openAnswer?.length !== 0 && answer.openAnswer?.length !== undefined) ? answer.openAnswer : " " : null,
+          answerId: answer.questionType === "SINGLE" ? answer.selectedAnswerId : null,
+          answerIds: answer.questionType === "MULTI" ? answer.selectedAnswerIds : null
+        }))
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        // console.log("Here!!");
+        setIsTestSubmitting(false);
+      }
+      else {
+        console.log("error during test submitting");
+        setIsErrorTestSubmit(true);
+        setIsTestSubmitting(false);
+      }
+    })
+    .catch(error => {
+      console.log("error during test submitting");
+      setIsErrorTestSubmit(true);
+      setIsTestSubmitting(false);
+    });
   };
 
   return {

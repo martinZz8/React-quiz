@@ -16,7 +16,7 @@ import ViewAddNewQuestion from "../../add-new-question/add-new-question.componen
 import ViewShowQuestions from "../../show-questions/show-questions.component";
 import ViewAddNewTest from "../../add-new-test/add-new-test.component";
 import ViewShowTests from "../../show-tests/show-tests.component";
-import ViewShowTestsToRate from "../../show-tests-to-rate/show-tests-to-rate.component";
+import ViewShowCompletedTests from "../../show-completed-tests/show-completed-tests.component";
 import ViewRateTest from "../../rate-test/rate-test.component";
 
 // interfaces
@@ -64,15 +64,14 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
         }
       />
       {/*Tests*/}
-      {/*other routes*/}
       {/*<Route*/}
       {/*  exact*/}
       {/*  path="/testy/wyniki/:id"*/}
       {/*  component={() => (*/}
       {/*    isUserType("student", userRoles) ?*/}
-      {/*      <ViewTestResult appVersion={appVersion} />*/}
+      {/*      <ViewStudentTestResult appVersion={appVersion} />*/}
       {/*    ://TEACHER*/}
-      {/*      <Redirect to="/" />*/}
+      {/*      <ViewTeacherTestResult appVersion={appVersion} />*/}
       {/*  )*/}
       {/*  }*/}
       {/*/>*/}
@@ -100,10 +99,10 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
       />
       <Route
         exact
-        path="/testy/ocen"
+        path="/testy/zakonczone"
         component={() => (
           isUserType("teacher", userRoles) ?
-            <ViewShowTestsToRate appVersion={appVersion} />
+            <ViewShowCompletedTests appVersion={appVersion} />
           ://STUDENT
             <Redirect to="/" />
         )

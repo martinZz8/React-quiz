@@ -2,8 +2,8 @@
 import {IUserRoles, IRegisterInputs, IErrorRegisterInputs} from "./register-form.types";
 
 export const userRoles: IUserRoles = {
-  student: "ROLE_USER",
-  teacher: "ROLE_TEACHER"
+  student: "USER",
+  teacher: "TEACHER"
 };
 
 export const initialRegisterInputs: IRegisterInputs = {

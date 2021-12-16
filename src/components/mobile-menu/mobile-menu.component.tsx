@@ -103,10 +103,10 @@ const MobileMenu: React.FC<IMobileMenu> = ({onOutClick, isStudent, isTeacher}) =
                     <div className={styles.menuSubItem}>
                       <NavLink
                         exact
-                        to="/testy/ocen"
+                        to="/testy/zakonczone"
                         activeClassName={styles.activeLink}
                       >
-                        Testy do oceny
+                        Zakończone testy
                       </NavLink>
                     </div>
                   </>

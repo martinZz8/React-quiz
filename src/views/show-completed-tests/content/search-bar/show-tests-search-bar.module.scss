@@ -10,7 +10,7 @@
   align-items: flex-start;
   border-bottom: 1px solid $colorBlack;
 
-  .testNameInputWrap {
+  .testNameInputWrap, .statusSelectWrap {
     width: 100%;
     height: auto;
   }
@@ -24,6 +24,10 @@
 
     .testNameInputWrap {
       width: 400px;
+    }
+
+    .statusSelectWrap {
+      width: 200px;
     }
   }
 }

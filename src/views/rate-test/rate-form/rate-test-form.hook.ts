@@ -11,8 +11,9 @@ import {initialValidateErrors} from "./rate-test-form.data";
 
 // interfaces
 import {IQuestion, IStudent, IStudentAnswers, IAwardedPointsToStudent, IAwardedAnswer, IValidateErrors} from "./rate-test-form.types";
+import {IQuestionTypes} from "../../../types/question.types";
 
-const useRateTestForm = () => {
+const useRateTestForm = (testId: string) => {
   const [questions, setQuestions] = useState<IQuestion[]>([]);
   const [students, setStudents] = useState<IStudent[]>([]);
   const [studentsAnswers, setStudentsAnswers] = useState<IStudentAnswers[]>([]);
@@ -48,6 +49,7 @@ const useRateTestForm = () => {
   // Load questions, students and answers from backend API
   useEffect(() => {
     setAreAnswersLoading(true);
+
     // Load teacher's questions
     fetch(`${process.env.REACT_APP_BACKED_URL}/api/questions/teacher`, {
       method: 'GET',
@@ -58,8 +60,8 @@ const useRateTestForm = () => {
     })
     .then(async response => {
       if (response.ok) {
-        let data = await response.json();
-        setQuestions(data.content.map((question: any) => ({
+        let dataOne = await response.json();
+        setQuestions(dataOne.content.map((question: any) => ({
           id: question.id,
           question: question.text,
           maxPoints: question.points,
@@ -82,8 +84,8 @@ const useRateTestForm = () => {
         })
         .then(async response => {
           if (response.ok) {
-            let data = await response.json();
-            let students = data.content.filter((user: any) => isUserType("student", user.roles.map((role: any) => role.role)));
+            let dataTwo = await response.json();
+            let students = dataTwo.content.filter((user: any) => isUserType("student", user.roles.map((role: any) => role.role)));
             setStudents(students.map((student: any) => ({
               id: student.id,
               email: student.email,
@@ -93,62 +95,59 @@ const useRateTestForm = () => {
             })));
 
             // Load student's answers for this test
-            // TEMP DATA - to be deleted
-            let tempStudentsAnswers: IStudentAnswers[] = [
-              {
-                studentId: 3,
-                answers: [
-                  {
-                    id: 1,
-                    questionId: 2,
-                    type: "MULTI",
-                    selectedClosedAnswersIds: [44, 45],
-                    writtenOpenedAnswer: null
-                  },
-                  {
-                    id: 2,
-                    questionId: 3,
-                    type: "DESCRIPTIVE",
-                    selectedClosedAnswersIds: null,
-                    writtenOpenedAnswer: "Bardzo dużo."
-                  }
-                ]
-              },
-              {
-                studentId: 1,
-                answers: [
-                  {
-                    id: 1,
-                    questionId: 2,
-                    type: "MULTI",
-                    selectedClosedAnswersIds: [44],
-                    writtenOpenedAnswer: null
-                  },
-                  {
-                    id: 2,
-                    questionId: 3,
-                    type: "DESCRIPTIVE",
-                    selectedClosedAnswersIds: null,
-                    writtenOpenedAnswer: "Nie wiem ile, co ja jestem."
-                  }
-                ]
-              },
-            ];
-            setStudentsAnswers(tempStudentsAnswers);
+            fetch(`${process.env.REACT_APP_BACKED_URL}/api/results/${testId}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+              }
+            })
+            .then(async response => {
+              if (response.ok) {
+                let dataThree = await response.json();
 
-            // TO DO - download answers from backend API when it's done
+                // Setting student answers
+                setStudentsAnswers(dataThree.map((student: any) => ({
+                  studentId: student.studentId,
+                  answers: student.answers.map((answer: any) => {
+                    let answerType: IQuestionTypes = "SINGLE";
+                    let foundAnswer = dataOne.content.find((question: any) => question.id === answer.questionId);
 
+                    if (foundAnswer) {
+                      answerType = foundAnswer.type;
+                    }
 
-            // set initial awarded points - TO BE SETTED FROM DATA FROM BACKEND API
-            setAwardedPointsToStudents(tempStudentsAnswers.map(student => ({
-              studentId: student.studentId,
-              answers: student.answers.map(answer => ({
-                questionId: answer.questionId,
-                awardedPoints: ""
-              }))
-            })));
+                    return {
+                      id: answer.id,
+                      questionId: answer.questionId,
+                      selectedClosedAnswersIds: answerType !== "DESCRIPTIVE" ? answer.selectedClosedAnswersIds : null,
+                      writtenOpenedAnswer: answerType === "DESCRIPTIVE" ? answer.writtenOpenedAnswers : null,
+                      type: answerType
+                    };
+                  })
+                })));
 
-            setAreAnswersLoading(false);
+                // Setting initial awarded points
+                setAwardedPointsToStudents(dataThree.map((student: any) => ({
+                  studentId: student.studentId,
+                  answers: student.answers.map((answer: any) => ({
+                    questionId: answer.questionId,
+                    awardedPoints: ""
+                  }))
+                })));
+                setAreAnswersLoading(false);
+              }
+              else {
+                setHasTeacherAccess(false);
+                setAreAnswersLoading(false);
+                console.log("error during answers download");
+              }
+            })
+            .catch(error => {
+              setHasTeacherAccess(false);
+              setAreAnswersLoading(false);
+              console.log("error during answers download");
+            });
           }
           else {
             setHasTeacherAccess(false);

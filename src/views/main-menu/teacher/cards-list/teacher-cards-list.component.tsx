@@ -77,7 +77,7 @@ const TeacherCardsList: React.FC = () => {
                   subText="Oceniaj zakończone testy i przeglądaj ich wyniki."
                   svgName="results"
                   buttonTitle="Sprawdź"
-                  linkToRedirect="/testy/wyniki"
+                  linkToRedirect="/testy/zakonczone"
                   isSmallWidth={true}
                 />
               </>

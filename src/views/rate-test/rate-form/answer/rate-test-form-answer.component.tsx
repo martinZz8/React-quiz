@@ -38,7 +38,7 @@ const RateTestFormAnswer: React.FC<IRateTestFormAnswer> = ({
             <TextArea
               name="textArea"
               value={studentAnswer?.writtenOpenedAnswer ? studentAnswer.writtenOpenedAnswer : ""}
-              placeholder="Open answer"
+              placeholder="Brak odpowiedzi."
               handleChange={(name, value) => {}}
               disabled
             />

@@ -1,5 +1,8 @@
 import {useState} from "react";
 
+// interfaces
+import {ICompletedTestStatus} from "../show-completed-tests-content.types";
+
 const useShowTestsList = () => {
   const [openedTestsIds, setOpenedTestsIds] = useState<number[]>([]);
 
@@ -19,9 +22,21 @@ const useShowTestsList = () => {
     }
   };
 
+  const translateTestStatus = (status: ICompletedTestStatus): string => {
+    if (status === "RATED") {
+      return "Ocenione";
+    }
+    else if (status === "TO_RATE") {
+      return "Do oceny";
+    }
+
+    return "-";
+  };
+
   return {
     openedTestsIds,
-    toggleOpenedTestsIds
+    toggleOpenedTestsIds,
+    translateTestStatus
   };
 };
 
