@@ -52,7 +52,7 @@ const ShowTestsList: React.FC<IShowTestsList> = ({
                   <p>{index+1}. {test.name}</p>
                 </div>
                 <div className={styles.testStatus}>
-                  <div className={`${styles.dot} ${test.status === "TO_RATE" ? styles.purple : styles.blue}`}/>
+                  <div className={`${styles.dot} ${test.status === "TO_RATE" ? styles.purple : test.status === "RATED" ? styles.blue : styles.red}`}/>
                   <p>{translateTestStatus(test.status)}</p>
                 </div>
                 <div className={styles.utils}>
@@ -104,17 +104,22 @@ const ShowTestsList: React.FC<IShowTestsList> = ({
                         }
                       </p>
                     </div>
-                    <div className={styles.row} style={{marginTop: "10px"}}>
-                      <div className={`${styles.editButtonWrap} ${test.status === "RATED" ? styles.extendedWidth : ""}`}>
-                        <Button
-                          type="button"
-                          fontColor="white"
-                          backgroundColor="lightPurple"
-                          title={test.status === "TO_RATE" ? "Oceń" : "Zobacz wyniki"}
-                          handleClick={() => history.push(`/testy/${test.status === "TO_RATE" ? "ocen" : "wyniki"}/${test.id}`)}
-                        />
-                      </div>
-                    </div>
+                    {
+                      (test.executionSize > 0) ?
+                        <div className={styles.row} style={{marginTop: "10px"}}>
+                          <div className={`${styles.editButtonWrap} ${test.status === "RATED" ? styles.extendedWidth : ""}`}>
+                            <Button
+                              type="button"
+                              fontColor="white"
+                              backgroundColor="lightPurple"
+                              title={test.status === "TO_RATE" ? "Oceń" : "Zobacz wyniki"}
+                              handleClick={() => history.push(`/testy/${test.status === "TO_RATE" ? "ocen" : "wyniki/nauczyciel"}/${test.id}`)}
+                            />
+                          </div>
+                        </div>
+                      :
+                        null
+                    }
                   </div>
                 :
                   null

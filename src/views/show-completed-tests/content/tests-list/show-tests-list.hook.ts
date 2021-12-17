@@ -29,6 +29,9 @@ const useShowTestsList = () => {
     else if (status === "TO_RATE") {
       return "Do oceny";
     }
+    else if (status === "COMPLETED_WITHOUT_EXECUTIONS") {
+      return "Skończone bez wykonań";
+    }
 
     return "-";
   };

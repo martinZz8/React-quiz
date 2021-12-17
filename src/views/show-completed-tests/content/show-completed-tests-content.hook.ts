@@ -10,7 +10,7 @@ import isUserType from "../../../functions/is-user-type";
 import {initialSearchBarInputs} from "./show-completed-tests-content.data";
 
 // interfaces
-import {ITestToRate, ISearchBarInputs, ICompletedTestStatus} from "./show-completed-tests-content.types";
+import {ITestToRate, ISearchBarInputs} from "./show-completed-tests-content.types";
 
 const useShowTestsToRateContent = () => {
   const [tests, setTests] = useState<ITestToRate[]>([]);
@@ -42,7 +42,7 @@ const useShowTestsToRateContent = () => {
         setTests(data.content.map((test: any) => ({
           id: test.id,
           name: test.name,
-          status: test.status,
+          status: test.executionSize > 0 ? test.status : "COMPLETED_WITHOUT_EXECUTIONS",
           availableUsersSize: test.availableUsersSize,
           organizer: test.organizer,
           startDate: test.startDate,

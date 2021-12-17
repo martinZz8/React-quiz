@@ -18,5 +18,9 @@ export const selectTestStatusOptions: ITestStatusOption[] = [
   {
     value: "RATED",
     textToShow: "Ocenione"
+  },
+  {
+    value: "COMPLETED_WITHOUT_EXECUTIONS",
+    textToShow: "Skończone bez wykonań"
   }
 ];

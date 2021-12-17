@@ -26,7 +26,7 @@ const SingleTest: React.FC<ISingleTest> = ({history, testToShow, isActiveTestsVi
         }
         else {
           if (testToShow.isResult) {
-            history.push(`/testy/wyniki/${testToShow.id}`);
+            history.push(`/testy/wyniki/student/${testToShow.id}`);
           }
         }
       }}

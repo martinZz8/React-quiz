@@ -1,4 +1,4 @@
-export type ICompletedTestStatus = "" | "TO_RATE" | "RATED"
+export type ICompletedTestStatus = "" | "TO_RATE" | "RATED" | "COMPLETED_WITHOUT_EXECUTIONS";
 
 export interface ITestToRate {
   id: number;

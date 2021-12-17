@@ -26,7 +26,6 @@ const ShowStudentTestResultContent: React.FC<IShowStudentTestResultContent> = ({
     isAccessForbidden
   } = useShowStudentTestResultContent(match.params.id);
 
-
   return (
     <TemplateContentCard
       title={<p>Rezultat testu</p>}

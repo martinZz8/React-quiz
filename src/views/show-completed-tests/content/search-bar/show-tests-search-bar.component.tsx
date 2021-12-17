@@ -43,6 +43,7 @@ const ShowTestsSearchBar: React.FC<IShowTestsSearchBar> = ({searchBarInputs, han
             textToShow: option.textToShow
           }))}
           handleChange={handleSearchBarInputs}
+          isExtended
         />
       </div>
     </div>

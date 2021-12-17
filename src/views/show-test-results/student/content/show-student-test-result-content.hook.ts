@@ -17,9 +17,9 @@ const useShowStudentTestResultContent = (resultId :string) => {
 
   const accessToken = useTypedSelector(state => state.login.loginData.accessToken);
 
-  useEffect(() => {
-    console.log("results:", results);
-  },[results]);
+  // useEffect(() => {
+  //   console.log("results:", results);
+  // },[results]);
 
   // Download results for that test of logged user
   useEffect(() => {

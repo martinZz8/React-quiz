@@ -13,12 +13,15 @@ import TextArea from "../../../../../components/ui/text-area/text-area.component
 
 // interfaces
 import {IResult} from "../show-student-test-result.types";
+import {IStudentData} from "../../../teacher/content/show-teacher-test-result-content.types";
 
 interface IStudentResultsList {
   results: IResult;
+  actualStudent?: IStudentData;
+  isTeacherView?: boolean;
 }
 
-const StudentResultsList: React.FC<IStudentResultsList> = ({results}) => {
+const StudentResultsList: React.FC<IStudentResultsList> = ({results, actualStudent, isTeacherView}) => {
   const {checkIfStudentCheckedThatAnswer} = useStudentResultsList();
 
   return (
@@ -28,6 +31,16 @@ const StudentResultsList: React.FC<IStudentResultsList> = ({results}) => {
           <p>Informacje o teście</p>
         </div>
         <div className={styles.content}>
+          {
+            (isTeacherView && actualStudent) ?
+              <>
+                <p><b>Rozwiązujący uczeń: </b>{actualStudent.firstName} {actualStudent.lastName}</p>
+                <p><b>Nazwa użytkownika ucznia: </b>{actualStudent.userName}</p>
+                <p><b>Email ucznia: </b>{actualStudent.email}</p>
+              </>
+            :
+              null
+          }
           <p><b>Nazwa testu: </b>{results.name}</p>
           <p><b>Data wykonania: </b>{results.dateOfExecution}</p>
           <p><b>Maksymalna ilość punktów do zdobycia: </b>{results.maxPoints}</p>
@@ -53,7 +66,7 @@ const StudentResultsList: React.FC<IStudentResultsList> = ({results}) => {
                     answer.questionType !== "DESCRIPTIVE" ?
                       <>
                         <div className={styles.userClosedAnswers}>
-                          <p>Twoje odpowiedzi:</p>
+                          <p>{!isTeacherView ? "Twoje odpowiedzi:" : "Odpowiedzi studenta:"}</p>
                           <div className={styles.answersSet}>
                             {
                               answer.questionType === "SINGLE" ?

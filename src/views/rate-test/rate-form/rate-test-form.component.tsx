@@ -47,7 +47,7 @@ const RateTestForm: React.FC<IRateTestForm> = ({match}) => {
         {
           !areAnswersLoading && !isSendingAnswers ?
             !areAnswersSendProperly ?
-              hasTeacherAccess ?
+              (hasTeacherAccess && studentsAnswers.length > 0) ?
                 <>
                   <div className={styles.headerWrap}>
                     <RateTestFormHeader
