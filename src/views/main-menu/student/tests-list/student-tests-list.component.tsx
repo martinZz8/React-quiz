@@ -31,7 +31,7 @@ const StudentTestsList: React.FC = () => {
       <div className={styles.testsView}>
         <MainMenuHeader
           firstTitle="Aktywne testy"
-          secondTitle="Zakończone testy"
+          secondTitle="Nieaktywne testy"
           onFirstTitleClick={() => setIsActiveTestsView(true)}
           onSecondTitleClick={() => setIsActiveTestsView(false)}
           isFirstHeaderActive={isActiveTestsView}
@@ -42,7 +42,7 @@ const StudentTestsList: React.FC = () => {
               testsToShow.length > 0 ?
                 testsToShow.map(test => (
                   <SingleTest
-                    key={test.id}
+                    key={`${!test.isResult ? "test" : "result"}_${test.id}`}
                     testToShow={test}
                     isActiveTestsView={isActiveTestsView}
                   />

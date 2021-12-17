@@ -12,10 +12,11 @@ interface IButton {
   handleClick?: () => void;
   disabled?: boolean;
   noBorderRadius?: boolean;
+  defaultCursor?: boolean;
 }
 
 const Button: React.FC<IButton> = ({
-    type, title, backgroundColor, fontColor, handleClick, disabled, noBorderRadius
+    type, title, backgroundColor, fontColor, handleClick, disabled, noBorderRadius, defaultCursor
   }) => {
   const stylesBackgroundColor = backgroundColor === "lightPurple" ? styles.backgroundColorLightPurple : backgroundColor === "purple" ? styles.backgroundColorPurple : backgroundColor === "red" ? styles.backgroundColorRed : styles.backgroundColorBlack;
   const stylesFontColor = fontColor === "white" ? styles.fontColorWhite : styles.fontColorWhite;
@@ -43,6 +44,7 @@ const Button: React.FC<IButton> = ({
           ${!disabled ? hoverColors : ""}
           ${disabled ? styles.disabledColors : ""}
           ${noBorderRadius ? styles.noBorderRadius : ""}
+          ${defaultCursor ? styles.defaultCursor : ""}
         `}
         type={type}
         onClick={() => handleClick && handleClick()}

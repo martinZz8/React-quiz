@@ -74,5 +74,9 @@
     &.noBorderRadius {
       border-radius: 0;
     }
+
+    &.defaultCursor {
+      cursor: default;
+    }
   }
 }

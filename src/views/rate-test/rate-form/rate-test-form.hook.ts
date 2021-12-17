@@ -23,28 +23,30 @@ const useRateTestForm = (testId: string) => {
   const [actualStudentIndex, setActualStudentIndex] = useState<number>(0);
   const [validateErrors, setValidateErrors] = useState<IValidateErrors>(initialValidateErrors);
   const [isLiveValidation, setIsLiveValidation] = useState<boolean>(false);
+  const [isSendingAnswers, setIsSendingAnswers] = useState<boolean>(false);
+  const [areAnswersSendProperly, setAreAnswersSendProperly] = useState<boolean>(false);
 
   const accessToken = useTypedSelector(state => state.login.loginData.accessToken);
 
-  useEffect(() => {
-    console.log("questions", questions);
-  },[questions]);
+  // useEffect(() => {
+  //   console.log("questions", questions);
+  // },[questions]);
 
-  useEffect(() => {
-    console.log("students", students);
-  },[students]);
+  // useEffect(() => {
+  //   console.log("students", students);
+  // },[students]);
 
-  useEffect(() => {
-    console.log("studentsAnswers", studentsAnswers);
-  },[studentsAnswers]);
+  // useEffect(() => {
+  //   console.log("studentsAnswers", studentsAnswers);
+  // },[studentsAnswers]);
 
-  useEffect(() => {
-    console.log("awardedPointsToStudents", awardedPointsToStudents);
-  },[awardedPointsToStudents]);
+  // useEffect(() => {
+  //   console.log("awardedPointsToStudents", awardedPointsToStudents);
+  // },[awardedPointsToStudents]);
 
-  useEffect(() => {
-    console.log("validateErrors", validateErrors);
-  },[validateErrors]);
+  // useEffect(() => {
+  //   console.log("validateErrors", validateErrors);
+  // },[validateErrors]);
 
   // Load questions, students and answers from backend API
   useEffect(() => {
@@ -106,35 +108,51 @@ const useRateTestForm = (testId: string) => {
               if (response.ok) {
                 let dataThree = await response.json();
 
-                // Setting student answers
-                setStudentsAnswers(dataThree.map((student: any) => ({
-                  studentId: student.studentId,
-                  answers: student.answers.map((answer: any) => {
-                    let answerType: IQuestionTypes = "SINGLE";
-                    let foundAnswer = dataOne.content.find((question: any) => question.id === answer.questionId);
+                // Check if test is not rated yet
+                let canAccess = true;
 
-                    if (foundAnswer) {
-                      answerType = foundAnswer.type;
-                    }
+                for (let student of dataThree) {
+                  if (student.answers.length === 0) {
+                    canAccess = false;
+                    break;
+                  }
+                }
 
-                    return {
-                      id: answer.id,
+                if (canAccess) {
+                  // Setting student answers
+                  setStudentsAnswers(dataThree.map((student: any) => ({
+                    studentId: student.studentId,
+                    answers: student.answers.map((answer: any) => {
+                      let answerType: IQuestionTypes = "SINGLE";
+                      let foundAnswer = dataOne.content.find((question: any) => question.id === answer.questionId);
+
+                      if (foundAnswer) {
+                        answerType = foundAnswer.type;
+                      }
+
+                      return {
+                        id: answer.id,
+                        questionId: answer.questionId,
+                        selectedClosedAnswersIds: answerType !== "DESCRIPTIVE" ? answer.selectedClosedAnswersIds : null,
+                        writtenOpenedAnswer: answerType === "DESCRIPTIVE" ? answer.writtenOpenedAnswers : null,
+                        type: answerType
+                      };
+                    })
+                  })));
+
+                  // Setting initial awarded points
+                  setAwardedPointsToStudents(dataThree.map((student: any) => ({
+                    studentId: student.studentId,
+                    answers: student.answers.map((answer: any) => ({
                       questionId: answer.questionId,
-                      selectedClosedAnswersIds: answerType !== "DESCRIPTIVE" ? answer.selectedClosedAnswersIds : null,
-                      writtenOpenedAnswer: answerType === "DESCRIPTIVE" ? answer.writtenOpenedAnswers : null,
-                      type: answerType
-                    };
-                  })
-                })));
+                      awardedPoints: ""
+                    }))
+                  })));
+                }
+                else {
+                  setHasTeacherAccess(false);
+                }
 
-                // Setting initial awarded points
-                setAwardedPointsToStudents(dataThree.map((student: any) => ({
-                  studentId: student.studentId,
-                  answers: student.answers.map((answer: any) => ({
-                    questionId: answer.questionId,
-                    awardedPoints: ""
-                  }))
-                })));
                 setAreAnswersLoading(false);
               }
               else {
@@ -306,7 +324,6 @@ const useRateTestForm = (testId: string) => {
   };
 
   const submitAnswersRating = () => {
-    console.log("submiting answers rating");
     setIsLiveValidation(true);
     let canSubmit = true;
 
@@ -316,8 +333,39 @@ const useRateTestForm = (testId: string) => {
     }
 
     if (canSubmit) {
-      console.log("can submit");
-      // TO DO - submit answers rating when backend api is prepared
+      // Submitting ratings to the test
+      setIsSendingAnswers(true);
+      fetch(`${process.env.REACT_APP_BACKED_URL}/api/tests/${testId}/rate`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+          testId: testId,
+          points: awardedPointsToStudents.map(student => ({
+            studentId: student.studentId,
+            answers: student.answers.map(answer => ({
+              questionId: answer.questionId,
+              awardedPoints: parseInt(answer.awardedPoints)
+            }))
+          }))
+        })
+      })
+        .then(async response => {
+          if (response.ok) {
+            setIsSendingAnswers(false);
+            setAreAnswersSendProperly(true);
+          }
+          else {
+            setIsSendingAnswers(false);
+            console.log("error during sending ratings");
+          }
+        })
+        .catch(error => {
+          setIsSendingAnswers(false);
+          console.log("error during sending ratings");
+        });
 
     }
   };
@@ -334,7 +382,9 @@ const useRateTestForm = (testId: string) => {
     handleActualStudent,
     submitAnswersRating,
     validateErrors,
-    getActualStudent
+    getActualStudent,
+    isSendingAnswers,
+    areAnswersSendProperly
   };
 };
 

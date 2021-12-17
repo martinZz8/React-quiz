@@ -18,6 +18,7 @@ import ViewAddNewTest from "../../add-new-test/add-new-test.component";
 import ViewShowTests from "../../show-tests/show-tests.component";
 import ViewShowCompletedTests from "../../show-completed-tests/show-completed-tests.component";
 import ViewRateTest from "../../rate-test/rate-test.component";
+import ViewShowStudentTestResult from "../../show-test-results/student/show-student-test-result.component";
 
 // interfaces
 interface IAuthenticatedApp {
@@ -64,17 +65,18 @@ const AuthenticatedApp: React.FC<IAuthenticatedApp> = ({appVersion}) => {
         }
       />
       {/*Tests*/}
-      {/*<Route*/}
-      {/*  exact*/}
-      {/*  path="/testy/wyniki/:id"*/}
-      {/*  component={() => (*/}
-      {/*    isUserType("student", userRoles) ?*/}
-      {/*      <ViewStudentTestResult appVersion={appVersion} />*/}
-      {/*    ://TEACHER*/}
-      {/*      <ViewTeacherTestResult appVersion={appVersion} />*/}
-      {/*  )*/}
-      {/*  }*/}
-      {/*/>*/}
+      <Route
+        exact
+        path="/testy/wyniki/:id"
+        component={() => (
+          isUserType("student", userRoles) ?
+            <ViewShowStudentTestResult appVersion={appVersion} />
+          ://TEACHER
+            // <ViewTeacherTestResult appVersion={appVersion} />
+            <></>
+        )
+        }
+      />
       <Route
         exact
         path="/testy/rozwiaz/:id"

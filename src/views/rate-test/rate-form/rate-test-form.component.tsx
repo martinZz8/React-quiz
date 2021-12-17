@@ -1,5 +1,6 @@
 import React from "react";
 import {RouteComponentProps, withRouter} from "react-router";
+import {NavLink} from "react-router-dom";
 
 // styles
 import styles from "./rate-test-form.module.scss";
@@ -33,7 +34,9 @@ const RateTestForm: React.FC<IRateTestForm> = ({match}) => {
     handleActualStudent,
     handleStudentAnswerRate,
     submitAnswersRating,
-    getActualStudent
+    getActualStudent,
+    isSendingAnswers,
+    areAnswersSendProperly
   } = useRateTestForm(match.params.id);
 
   return (
@@ -42,57 +45,67 @@ const RateTestForm: React.FC<IRateTestForm> = ({match}) => {
     >
       <div className={styles.rateTestForm}>
         {
-          !areAnswersLoading ?
-            hasTeacherAccess ?
-              <>
-                <div className={styles.headerWrap}>
-                  <RateTestFormHeader
-                    actualStudent={getActualStudent()}
-                  />
+          !areAnswersLoading && !isSendingAnswers ?
+            !areAnswersSendProperly ?
+              hasTeacherAccess ?
+                <>
+                  <div className={styles.headerWrap}>
+                    <RateTestFormHeader
+                      actualStudent={getActualStudent()}
+                    />
+                  </div>
+                  <div className={`customScrollBar ${styles.questionContainer}`}>
+                    {
+                      studentsAnswers.length > 0 ?
+                        studentsAnswers[actualStudentIndex].answers.map((answer, index) =>
+                          <div
+                            className={styles.answerWrap}
+                            key={answer.id}
+                          >
+                            <RateTestFormAnswer
+                              ordinalNumber={index+1}
+                              question={questions.find(question => question.id === answer.questionId)}
+                              studentAnswer={answer}
+                              ratingValue={awardedPointsToStudents[actualStudentIndex].answers[index].awardedPoints}
+                              handleRatingChange={(value: string) => handleStudentAnswerRate(studentsAnswers[actualStudentIndex].studentId, answer.questionId, value)}
+                            />
+                          </div>
+                        )
+                      :
+                        null
+                    }
+                  </div>
+                  <div className={styles.navigationWrap}>
+                    <RateTestFormNavigation
+                      isPrevButtonVisible={actualStudentIndex > 0}
+                      isNextButtonVisible={actualStudentIndex < awardedPointsToStudents.length-1}
+                      handlePrevButtonClick={() => handleActualStudent("prev")}
+                      handleNextButtonClick={() => handleActualStudent("next")}
+                      handleSubmitClick={submitAnswersRating}
+                      actualPage={actualStudentIndex+1}
+                      maxPage={awardedPointsToStudents.length}
+                      isSubmitError={validateErrors.points !== "" || validateErrors.aboveMaxPoints !== ""}
+                      errorMessage={validateErrors.points !== "" ? validateErrors.points : validateErrors.aboveMaxPoints !== "" ? validateErrors.aboveMaxPoints : ""}
+                    />
+                  </div>
+                </>
+              :
+                <div className={styles.noAccess}>
+                  <p>
+                    Nie ma odpowiedzi do testu o podanym numerze ID, nie masz do niego dostępu albo już go oceniłeś.
+                  </p>
                 </div>
-                <div className={`customScrollBar ${styles.questionContainer}`}>
-                  {
-                    studentsAnswers.length > 0 ?
-                      studentsAnswers[actualStudentIndex].answers.map((answer, index) =>
-                        <div
-                          className={styles.answerWrap}
-                          key={answer.id}
-                        >
-                          <RateTestFormAnswer
-                            ordinalNumber={index+1}
-                            question={questions.find(question => question.id === answer.questionId)}
-                            studentAnswer={answer}
-                            ratingValue={awardedPointsToStudents[actualStudentIndex].answers[index].awardedPoints}
-                            handleRatingChange={(value: string) => handleStudentAnswerRate(studentsAnswers[actualStudentIndex].studentId, answer.questionId, value)}
-                          />
-                        </div>
-                      )
-                    :
-                      null
-                  }
-                </div>
-                <div className={styles.navigationWrap}>
-                  <RateTestFormNavigation
-                    isPrevButtonVisible={actualStudentIndex > 0}
-                    isNextButtonVisible={actualStudentIndex < awardedPointsToStudents.length-1}
-                    handlePrevButtonClick={() => handleActualStudent("prev")}
-                    handleNextButtonClick={() => handleActualStudent("next")}
-                    handleSubmitClick={submitAnswersRating}
-                    actualPage={actualStudentIndex+1}
-                    maxPage={awardedPointsToStudents.length}
-                    isSubmitError={validateErrors.points !== "" || validateErrors.aboveMaxPoints !== ""}
-                    errorMessage={validateErrors.points !== "" ? validateErrors.points : validateErrors.aboveMaxPoints !== "" ? validateErrors.aboveMaxPoints : ""}
-                  />
-                </div>
-              </>
             :
-              <div className={styles.noAccess}>
-                <p>
-                  Nie ma odpowiedzi do testu o podanym numerze ID albo nie masz do niego dostępu.
-                </p>
+              <div className={styles.successSubmit}>
+                <p>Poprawnie przesłano odpowiedzi</p>
+                <NavLink to="/testy/zakonczone">
+                  Wróć do zakończonych testów
+                </NavLink>
               </div>
           :
-            <LoadingModal/>
+            <LoadingModal
+              message={isSendingAnswers ? "Przesyłanie odpowiedzi..." : undefined}
+            />
         }
       </div>
     </TemplateContentCard>

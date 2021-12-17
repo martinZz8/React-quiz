@@ -33,7 +33,7 @@ const SingleQuestion: React.FC<ISingleQuestion> = ({questionOrderNumber, questio
                   className={styles.answer}
                 >
                   <RadioButton
-                    name="single"
+                    name={`single_${answer.id}`}
                     label={answer.answer}
                     value={answer.answer}
                     checked={studentsQuestionAnswer.selectedAnswerId === answer.id}

@@ -40,12 +40,13 @@
     height: 74px;
   }
 
-  .noAccess {
+  .noAccess, .successSubmit {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 10px;
 
     p {
       font-size: 20px;
@@ -53,6 +54,20 @@
       font-style: normal;
       color: $colorBlack;
       text-align: center;
+    }
+  }
+
+  .successSubmit {
+    flex-direction: column;
+
+    a {
+      font-size: 17px;
+      font-weight: 600;
+      color: $colorDarkPurple;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }

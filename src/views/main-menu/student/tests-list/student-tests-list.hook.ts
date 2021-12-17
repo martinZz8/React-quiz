@@ -16,6 +16,10 @@ const useStudentTestsList = () => {
   const [areTestsLoading, setAreTestsLoading] = useState<boolean>(false);
   const accessToken = useTypedSelector(state => state.login.loginData.accessToken);
 
+  // useEffect(() => {
+  //   console.log("testsToShow", testsToShow);
+  // },[testsToShow]);
+
   useEffect(() => {
     // Load active tests
     setTestsToShow([]);
@@ -30,20 +34,68 @@ const useStudentTestsList = () => {
     })
     .then(async response => {
       if (response.ok) {
-        let data = await response.json();
-        setTestsToShow(data.content.map((item: any) => ({
+        let dataOne = await response.json();
+        setTestsToShow(dataOne.content.map((item: any) => ({
           id: item.id,
           name: item.name,
           author: item.organizer.split("(")[0],
           startDate: formatTestDate(item.startDate),
           endDate: formatTestDate(item.endDate),
-          time: formatTestTime(item.time)
+          time: formatTestTime(item.time),
+          isResult: false,
+          dateOfExecution: null,
+          maxPoints: null,
+          totalPoints: null
         })));
+
+        if (!isActiveTestsView) {
+          fetch(`${process.env.REACT_APP_BACKED_URL}/api/results`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${accessToken}`
+            }
+          })
+            .then(async response => {
+              if (response.ok) {
+                let dataTwo = await response.json();
+
+                setTestsToShow(prev => [
+                  ...prev,
+                  ...dataTwo.map((result: any) => ({
+                    id: result.id,
+                    name: result.name.split(" ").slice(0, -1).join(" "),
+                    author: null,
+                    startDate: null,
+                    endDate: null,
+                    time: null,
+                    isResult: true,
+                    dateOfExecution: formatTestDate(result.dateOfExecution),
+                    maxPoints: result.maxPoints,
+                    totalPoints: result.totalPoints
+                  }))
+                ])
+
+                setAreTestsLoading(false);
+              }
+              else {
+                setAreTestsLoading(false);
+                console.log("error during rated tests loading");
+              }
+            })
+            .catch(error => {
+              setAreTestsLoading(false);
+              console.log("error during rated tests loading");
+            })
+        }
+        else {
+          setAreTestsLoading(false);
+        }
       }
       else {
-        console.log("error during loading");
+        setAreTestsLoading(false);
+        console.log("error during finished tests loading");
       }
-      setAreTestsLoading(false);
     })
     .catch(error => {
       setAreTestsLoading(false);
