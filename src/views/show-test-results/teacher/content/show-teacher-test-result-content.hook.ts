@@ -5,6 +5,10 @@ import {useTypedSelector} from "../../../../hooks/useTypedSelector";
 import '../../../../assets/fonts/PTSans-normal';
 import { jsPDF } from "jspdf";
 
+// DOCX
+import * as docx from "docx";
+import {saveAs} from "file-saver";
+
 // functions
 import formatTestDate from "../../../../functions/format-test-date";
 import isUserType from "../../../../functions/is-user-type";
@@ -319,8 +323,217 @@ const useShowTeacherTestResultContent = (testId :string) => {
   };
 
   const generateDOCXFile = () => {
+    let testName = "";
+    const bigFontSize = 45;
+    const mediumFontSize = 35;
+    const smallFontSize = 30;
 
+    // Setting test name to use in file name
+    if (resultsArray.length > 0) {
+      testName = resultsArray[0].name;
+    }
 
+    const doc = new docx.Document({
+      creator: "Maciej Harbuz",
+      lastModifiedBy: "Maciej Harbuz",
+      description: `Wyniki testu o nazwie ${testName}`,
+      title: `${testName}_wyniki`,
+      sections: resultsArray.map((result, indexOne) => {
+        // Search for the student with specified id
+        let foundStudent = students.find(student => student.id === result.userId);
+
+        if (foundStudent) {
+          // Creation of section for specified student
+          return {
+            properties: {
+              type: docx.SectionType.NEXT_PAGE
+            },
+            children: [
+              new docx.Paragraph({
+                spacing: {
+                  after: 100
+                },
+                children: [
+                  new docx.TextRun({
+                    text: `${indexOne+1}. Informacje o teście - ${foundStudent.firstName} ${foundStudent.lastName}`,
+                    size: bigFontSize,
+                    bold: true
+                  })
+                ]
+              }),
+              new docx.Paragraph({
+                children: [
+                  new docx.TextRun({
+                    text: `Rozwiązujący uczeń: `,
+                    size: smallFontSize,
+                    bold: true
+                  }),
+                  new docx.TextRun({
+                    text: `${foundStudent.firstName} ${foundStudent.lastName}`,
+                    size: smallFontSize,
+                    bold: false
+                  })
+                ]
+              }),
+              new docx.Paragraph({
+                children: [
+                  new docx.TextRun({
+                    text: `Nazwa użytkownika: `,
+                    size: smallFontSize,
+                    bold: true
+                  }),
+                  new docx.TextRun({
+                    text: `${foundStudent.userName}`,
+                    size: smallFontSize,
+                    bold: false
+                  })
+                ]
+              }),
+              new docx.Paragraph({
+                children: [
+                  new docx.TextRun({
+                    text: `Email ucznia: `,
+                    size: smallFontSize,
+                    bold: true
+                  }),
+                  new docx.TextRun({
+                    text: `${foundStudent.email}`,
+                    size: smallFontSize,
+                    bold: false
+                  })
+                ]
+              }),
+              new docx.Paragraph({
+                children: [
+                  new docx.TextRun({
+                    text: `Nazwa testu: `,
+                    size: smallFontSize,
+                    bold: true
+                  }),
+                  new docx.TextRun({
+                    text: `${result.name}`,
+                    size: smallFontSize,
+                    bold: false
+                  })
+                ]
+              }),
+              new docx.Paragraph({
+                children: [
+                  new docx.TextRun({
+                    text: `Data wykonania: `,
+                    size: smallFontSize,
+                    bold: true
+                  }),
+                  new docx.TextRun({
+                    text: `${result.dateOfExecution}`,
+                    size: smallFontSize,
+                    bold: false
+                  })
+                ]
+              }),
+              new docx.Paragraph({
+                children: [
+                  new docx.TextRun({
+                    text: `Maksymalna ilość punktów do zdobycia: `,
+                    size: smallFontSize,
+                    bold: true
+                  }),
+                  new docx.TextRun({
+                    text: `${result.maxPoints}`,
+                    size: smallFontSize,
+                    bold: false
+                  })
+                ]
+              }),
+              new docx.Paragraph({
+                spacing: {
+                  after: 200
+                },
+                children: [
+                  new docx.TextRun({
+                    text: `Zdobyte punkty: `,
+                    size: smallFontSize,
+                    bold: true
+                  }),
+                  new docx.TextRun({
+                    text: `${result.totalPoints}`,
+                    size: smallFontSize,
+                    bold: false
+                  })
+                ]
+              }),
+              new docx.Paragraph({
+                spacing: {
+                  after: 120
+                },
+                children: [
+                  new docx.TextRun({
+                    text: `Odpowiedzi na pytania: `,
+                    size: bigFontSize,
+                    bold: true
+                  })
+                ]
+              }),
+              ...result.answers.map((answer, indexTwo) =>
+                new docx.Paragraph({
+                  spacing: {
+                    after: indexTwo < (result.answers.length-1) ? 100 : 0
+                  },
+                  children: [
+                    new docx.TextRun({
+                      text: `${indexTwo+1}. ${answer.questionText}`,
+                      size: mediumFontSize,
+                      bold: true
+                    }),
+                    new docx.TextRun({
+                      text: `Typ pytania: ${translateQuestionType(answer.questionType)}`,
+                      size: smallFontSize,
+                      bold: false,
+                      break: 1
+                    }),
+                    new docx.TextRun({
+                      text: `Zdobyte punkty: ${answer.answerRatedPoints} / ${answer.questionPoints}`,
+                      size: smallFontSize,
+                      bold: false,
+                      break: 1
+                    }),
+                    new docx.TextRun({
+                      text: `Prawidłowe odpowiedzi: ${answer.questionType !== "DESCRIPTIVE" ? answer.correctAnswers.filter(correctAnswer => correctAnswer.correct).map(correctAnswer => correctAnswer.answer).join(", ") : "-"}`,
+                      size: smallFontSize,
+                      bold: false,
+                      break: 1
+                    }),
+                    new docx.TextRun({
+                      text: `Odpowiedzi studenta: ${answer.questionType !== "DESCRIPTIVE" ? answer.userAnswers.map(userAnswer => userAnswer.answer).join(", ") : "-"}`,
+                      size: smallFontSize,
+                      bold: false,
+                      break: 1
+                    }),
+                    new docx.TextRun({
+                      text: `Otwarta odpowiedź studenta: ${answer.questionType === "DESCRIPTIVE" ? answer.descriptiveAnswerText : "-"}`,
+                      size: smallFontSize,
+                      bold: false,
+                      break: 1
+                    })
+                  ]
+                })
+              )
+            ]
+          }
+        }
+
+        // Default section, if student is not found
+        return {
+          properties: {},
+          children: []
+        };
+      })
+    });
+
+    // Used to export the file into a .docx file and download it
+    docx.Packer.toBlob(doc).then((blob) => {
+      saveAs(blob, `${testName}_wyniki.docx`);
+    });
   };
 
   return {
